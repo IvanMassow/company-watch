@@ -70,12 +70,12 @@ def generate_html_report(ticker=None):
 <meta property="og:type" content="website">
 <meta property="og:title" content="NOAH Company Watch - {ticker}">
 <meta property="og:description" content="Single stock intelligence. AI-managed trading vs buy-and-hold benchmark.">
-<meta property="og:image" content="https://ivanmassow.github.io/company-watch/og-image.png">
+<meta property="og:image" content="https://ivanmassow.github.io/company-watch/og-image.png?v=2">
 <meta property="og:url" content="https://ivanmassow.github.io/company-watch/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="NOAH Company Watch - {ticker}">
 <meta name="twitter:description" content="Single stock intelligence. AI-managed trading vs buy-and-hold benchmark.">
-<meta name="twitter:image" content="https://ivanmassow.github.io/company-watch/og-image.png">
+<meta name="twitter:image" content="https://ivanmassow.github.io/company-watch/og-image.png?v=2">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&family=Montserrat:wght@500;700&display=swap');
 
