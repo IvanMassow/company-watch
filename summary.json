@@ -1,7 +1,7 @@
 {
   "product": "company_watch",
   "ticker": "BABA",
-  "generated_at": "2026-02-15T10:38:53.389730+00:00",
+  "generated_at": "2026-02-15T14:04:32.113495+00:00",
   "current_price": 155.73,
   "active": {
     "state": "FLAT",
@@ -10,15 +10,17 @@
     "unrealised_pnl": 0,
     "realised_pnl": 0,
     "total_pnl": 0,
+    "daily_pnl": 0,
     "stance": "HOLD",
     "confidence": 55.0,
-    "report_confidence": 62.0,
+    "report_confidence": 57.0,
     "house_confidence": 55.0,
     "is_ducking": false
   },
   "passive": {
     "entry_price": 155.73,
-    "pnl": 0.0
+    "pnl": 0.0,
+    "daily_pnl": 0
   },
   "alpha": 0.0,
   "total_trades": 0,
