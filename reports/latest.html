@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Company Watch: BABA | 2026-02-15 08:29 UTC</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&family=Montserrat:wght@500;700&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Lato', sans-serif;
+    background: #FFF1E5;
+    color: #33302e;
+    line-height: 1.6;
+    padding: 0;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header */
+.header {
+    background: linear-gradient(135deg, #0d7680, #1a9ba5);
+    color: white;
+    padding: 30px 40px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+}
+.header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2em;
+    margin-bottom: 4px;
+}
+.header .subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9em;
+    opacity: 0.9;
+}
+.header .price-hero {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.8em;
+    font-weight: 700;
+    margin: 16px 0 8px;
+}
+.header .price-change {
+    font-size: 1.1em;
+    opacity: 0.9;
+}
+
+/* Section headers */
+.act-header {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4em;
+    color: #0d7680;
+    border-bottom: 2px solid #0d7680;
+    padding-bottom: 6px;
+    margin: 32px 0 16px;
+}
+
+/* Cards */
+.card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+.card-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.85em;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #73788a;
+    margin-bottom: 12px;
+}
+
+/* Two-line comparison */
+.lines-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+.line-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px 24px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    border-top: 4px solid;
+}
+.line-active { border-top-color: #0d7680; }
+.line-passive { border-top-color: #d97706; }
+.line-label {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+}
+.line-active .line-label { color: #0d7680; }
+.line-passive .line-label { color: #d97706; }
+.line-pnl {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2em;
+    font-weight: 700;
+}
+.line-detail {
+    font-size: 0.85em;
+    color: #73788a;
+    margin-top: 4px;
+}
+
+/* Alpha badge */
+.alpha-card {
+    background: white;
+    border-radius: 10px;
+    padding: 16px 24px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    text-align: center;
+    margin-bottom: 16px;
+}
+.alpha-value {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.4em;
+    font-weight: 700;
+}
+.alpha-label {
+    font-size: 0.85em;
+    color: #73788a;
+    margin-top: 4px;
+}
+
+/* Stance badge */
+.stance-badge {
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.85em;
+    letter-spacing: 0.03em;
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85em;
+}
+th {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.75em;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #73788a;
+    text-align: left;
+    padding: 8px 10px;
+    border-bottom: 2px solid #e8e4e0;
+}
+td {
+    padding: 8px 10px;
+    border-bottom: 1px solid #f0ece8;
+    vertical-align: top;
+}
+tr:hover { background: #fdf8f4; }
+
+/* Report card */
+.report-card {
+    background: white;
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-bottom: 10px;
+    border-left: 4px solid;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+
+/* Chart area (placeholder for inline sparkline) */
+.chart-area {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    min-height: 200px;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 24px;
+    color: #9ea2b0;
+    font-size: 0.8em;
+    margin-top: 32px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .lines-grid { grid-template-columns: 1fr; }
+    .header h1 { font-size: 1.6em; }
+    .header .price-hero { font-size: 2em; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+    <div class="subtitle">COMPANY WATCH</div>
+    <h1>BABA</h1>
+    <div class="price-hero">$155.73</div>
+    <div class="price-change" style="color:#cc0000">&#9660; -1.89% today</div>
+    <div class="subtitle" style="margin-top:12px">2026-02-15 08:29 UTC</div>
+</div>
+<h2 class="act-header">Act I: The Arena</h2>
+<div class="card">
+    <div class="card-title">Current Stance</div>
+    <span class="stance-badge" style="background:#fef3c7;color:#d97706">HOLD</span>
+    <span style="margin-left:12px;font-size:0.9em;color:#73788a">
+        Confidence: 62%
+    </span>
+</div>
+
+<div class="lines-grid">
+    <div class="line-card line-active">
+        <div class="line-label">Active Line (AI-Managed)</div>
+        <div class="line-pnl" style="color:#9ea2b0">&#9644; +0.00%</div>
+        <div class="line-detail">
+            State: FLAT <br>
+            Entry: FLAT<br>
+            Realised: +0.00% | Total: +0.00%
+        </div>
+    </div>
+    <div class="line-card line-passive">
+        <div class="line-label">Passive Line (Buy &amp; Hold)</div>
+        <div class="line-pnl" style="color:#9ea2b0">&#9644; +0.00%</div>
+        <div class="line-detail">
+            Entry: $155.73<br>
+            Strategy: Hold forever, take the hits and the good times
+        </div>
+    </div>
+</div>
+
+<div class="alpha-card">
+    <div class="alpha-value" style="color:#9ea2b0">+0.00%</div>
+    <div class="alpha-label">Alpha (Active - Passive) &middot; Tied</div>
+</div>
+<div class="chart-area" style="text-align:center;padding-top:80px;color:#9ea2b0">Awaiting price data for chart</div>
+<div class="report-card" style="border-left-color:#d97706">
+    <div class="card-title">Latest Report (2026-01-29T15:34)</div>
+    <span class="stance-badge" style="background:#fef3c7;color:#d97706">HOLD</span>
+    <span style="margin-left:8px;font-size:0.85em">Confidence: 62%</span>
+    <p style="margin-top:8px;font-size:0.9em;color:#555">Upside catalysts are partially confirmed but primary artefacts remain absent and risks from tightening US regulatory/compliance narratives persist; tape is risk-off, treat today's move with caution.</p>
+</div>
+<h2 class="act-header">Act II: The Ledger</h2><div class="card"><div class="card-title">Recent Decisions</div><table><tr><th>Time</th><th>Type</th><th>From</th><th>To</th><th>Conf</th><th>Trigger</th><th>Reason</th></tr><tr>
+            <td>2026-02-15 08:29</td>
+            <td>STANCE_UPDATE</td>
+            <td><span style="color:#9ea2b0">FADE</span></td>
+            <td><span style="color:#d97706">HOLD</span></td>
+            <td>62%</td>
+            <td>report</td>
+            <td style="font-size:0.8em">Upside catalysts are partially confirmed but primary artefacts remain absent and risks from tightening US regulatory/com</td>
+        </tr></table></div><h2 class="act-header">Act III: The Scoreboard</h2>
+<div class="lines-grid">
+    <div class="card">
+        <div class="card-title">Trading Performance</div>
+        <table>
+            <tr><td>Total Trades</td><td style="text-align:right;font-weight:700">0</td></tr>
+            <tr><td>Win Rate</td><td style="text-align:right;font-weight:700">0.0%</td></tr>
+            <tr><td>Avg Win</td><td style="text-align:right;color:#16a34a">+0.00%</td></tr>
+            <tr><td>Avg Loss</td><td style="text-align:right;color:#cc0000">+0.00%</td></tr>
+            <tr><td>Best Trade</td><td style="text-align:right;color:#16a34a">+0.00%</td></tr>
+            <tr><td>Worst Trade</td><td style="text-align:right;color:#cc0000">+0.00%</td></tr>
+            <tr><td>Avg Hold</td><td style="text-align:right">0h</td></tr>
+        </table>
+    </div>
+    <div class="card">
+        <div class="card-title">Decision Analysis</div>
+        <table>
+            <tr><td>Total Decisions</td><td style="text-align:right;font-weight:700">1</td></tr>
+            <tr><td>Entries</td><td style="text-align:right">0</td></tr>
+            <tr><td>Exits</td><td style="text-align:right">0</td></tr>
+            <tr><td>Stance Updates</td><td style="text-align:right">1</td></tr>
+            <tr><td>Report-Triggered</td><td style="text-align:right">1</td></tr>
+            <tr><td>Autonomous</td><td style="text-align:right">0</td></tr>
+            <tr><td>Overrides &#9889;</td><td style="text-align:right;font-weight:700">0 (0%)</td></tr>
+        </table>
+    </div>
+</div>
+<div class="card"><div class="card-title">Daily Comparison</div><table><tr><th>Date</th><th>Close</th><th>Active</th><th>Passive</th><th>Alpha</th><th>Stance</th><th>Report</th></tr><tr>
+                <td>2026-02-15</td>
+                <td>$155.73</td>
+                <td style="color:#9ea2b0">+0.00%</td>
+                <td style="color:#9ea2b0">+0.00%</td>
+                <td style="color:#9ea2b0;font-weight:700">+0.00%</td>
+                <td><span style="color:#9ea2b0">FLAT</span></td>
+                <td></td>
+            </tr></table></div><div class="card"><div class="card-title">Report History</div>
+<div class="report-card" style="border-left-color:#d97706;margin-bottom:8px">
+    <strong>2026-01-29</strong>
+    <span class="stance-badge" style="background:#fef3c7;color:#d97706;margin-left:8px">HOLD</span>
+    <span style="margin-left:6px;font-size:0.8em;color:#73788a">62%</span>
+    <div style="font-size:0.85em;color:#555;margin-top:4px">Upside catalysts are partially confirmed but primary artefacts remain absent and risks from tightening US regulatory/compliance narratives persist; tape is risk-off, treat today's move with caution.</div>
+</div>
+<div class="report-card" style="border-left-color:#d97706;margin-bottom:8px">
+    <strong>2026-01-28</strong>
+    <span class="stance-badge" style="background:#fef3c7;color:#d97706;margin-left:8px">HOLD</span>
+    <span style="margin-left:6px;font-size:0.8em;color:#73788a">62%</span>
+    <div style="font-size:0.85em;color:#555;margin-top:4px">Upside catalysts remain narrative-led with primary artefacts absent and policy friction risk elevated; tape confirmation is lacking.</div>
+</div>
+<div class="report-card" style="border-left-color:#d97706;margin-bottom:8px">
+    <strong>2026-01-28</strong>
+    <span class="stance-badge" style="background:#fef3c7;color:#d97706;margin-left:8px">HOLD</span>
+    <span style="margin-left:6px;font-size:0.8em;color:#73788a">68%</span>
+    <div style="font-size:0.85em;color:#555;margin-top:4px">Upside catalysts remain artefact-free and policy friction is material; price shows no confirming breakout; tape is risk-off, treat today's move with caution.</div>
+</div>
+<div class="report-card" style="border-left-color:#d97706;margin-bottom:8px">
+    <strong>2026-01-28</strong>
+    <span class="stance-badge" style="background:#fef3c7;color:#d97706;margin-left:8px">HOLD</span>
+    <span style="margin-left:6px;font-size:0.8em;color:#73788a">68%</span>
+    <div style="font-size:0.85em;color:#555;margin-top:4px">Upside catalysts feature partial validation but primary artefacts remain absent and policy friction introduces material risk; tape confirmation is lacking</div>
+</div>
+<div class="report-card" style="border-left-color:#d97706;margin-bottom:8px">
+    <strong>2026-01-27</strong>
+    <span class="stance-badge" style="background:#fef3c7;color:#d97706;margin-left:8px">HOLD</span>
+    <span style="margin-left:6px;font-size:0.8em;color:#73788a">65%</span>
+    <div style="font-size:0.85em;color:#555;margin-top:4px">Upside catalysts feature confirmed Qwen integration but lack primary artefacts and are offset by persistent policy friction; tape confirmation is unavailable.</div>
+</div>
+<div class="report-card" style="border-left-color:#d97706;margin-bottom:8px">
+    <strong>2026-01-27</strong>
+    <span class="stance-badge" style="background:#fef3c7;color:#d97706;margin-left:8px">HOLD</span>
+    <span style="margin-left:6px;font-size:0.8em;color:#73788a">65%</span>
+    <div style="font-size:0.85em;color:#555;margin-top:4px">Supportive product integration catalysts exist but primary artefacts for key upside drivers are missing while US policy restrictions pose confirmed but contained risks.</div>
+</div>
+<div class="report-card" style="border-left-color:#d97706;margin-bottom:8px">
+    <strong>2026-01-27</strong>
+    <span class="stance-badge" style="background:#fef3c7;color:#d97706;margin-left:8px">HOLD</span>
+    <span style="margin-left:6px;font-size:0.8em;color:#73788a">0%</span>
+    <div style="font-size:0.85em;color:#555;margin-top:4px">Alibaba Group Holding Ltd (BABA)</div>
+</div></div>
+<div class="footer">
+    Company Watch &middot; BABA &middot; Generated 2026-02-15 08:29 UTC<br>
+    Active line: AI-managed trading | Passive line: Buy &amp; hold benchmark<br>
+    <em>Paper trading only &middot; Not financial advice</em>
+</div>
+</div>
+</body>
+</html>
