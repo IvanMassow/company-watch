@@ -324,15 +324,15 @@ tr:hover {{ background: #fdf8f4; }}
 <div class="nav-header">
     <a href="https://ivanmassow.github.io/noah-dashboard/" class="logo">NOAH</a>
     <div class="nav">
+        <a href="https://ivanmassow.github.io/polyhunter/">Poly Market</a>
+        <a href="https://ivanmassow.github.io/hedgefund-tracker/">Hedge Fund</a>
+        <a href="https://ivanmassow.github.io/company-watch/" style="color:#fff">Company Watch</a>
+        <span style="color:rgba(255,255,255,0.15)">|</span>
         <a href="#arena">Arena</a>
         <a href="#ledger">Ledger</a>
         <a href="#scoreboard">Scoreboard</a>
-        <span style="color:rgba(255,255,255,0.15)">|</span>
-        <a href="https://ivanmassow.github.io/polyhunter/">Poly Market</a>
-        <a href="https://ivanmassow.github.io/hedgefund-tracker/">Hedge Fund</a>
-        <a href="https://ivanmassow.github.io/company-watch/">Company Watch</a>
     </div>
-    <div class="meta">Company Watch &middot; {ticker}</div>
+    <div class="meta">Company Watch &middot; {ticker} &middot; {timestamp}</div>
 </div>
 """.format(ticker=ticker, timestamp=timestamp)
 
