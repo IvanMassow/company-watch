@@ -1,17 +1,38 @@
 """
 Company Watch - Configuration
-Single-stock intelligence system that tracks daily reports,
+Stock intelligence system that tracks daily reports,
 makes trading decisions, and compares against a passive hold.
+
+Supports multiple stocks — each stock has its own RSS feed, ticker,
+and tracking line. Add a new stock by adding an entry to WATCHED_STOCKS.
 """
 import os
+import json
 
-# RSS feed for Company Watch reports
-RSS_URL = os.environ.get("RSS_URL", "https://alibaba.makes.news/rss.xml")
+# ====================================================================
+# MULTI-STOCK CONFIGURATION
+# Each stock is a dict with: ticker, company, rss_url
+# Add a new stock = add an entry here. That's it.
+# ====================================================================
+_stocks_json = os.environ.get("WATCHED_STOCKS", "")
 
-# Report title matching - we process any report containing ticker or company name
-# Set via .env or auto-detected from first report
-WATCHED_TICKER = os.environ.get("WATCHED_TICKER", "BABA")
-WATCHED_COMPANY = os.environ.get("WATCHED_COMPANY", "Alibaba")
+if _stocks_json:
+    # From env: JSON array of stock dicts
+    WATCHED_STOCKS = json.loads(_stocks_json)
+else:
+    # Default: build from individual env vars (backward compatible)
+    WATCHED_STOCKS = [
+        {
+            "ticker": os.environ.get("WATCHED_TICKER", "BABA"),
+            "company": os.environ.get("WATCHED_COMPANY", "Alibaba"),
+            "rss_url": os.environ.get("RSS_URL", "https://alibaba.makes.news/rss.xml"),
+        },
+    ]
+
+# Convenience shortcuts for backward compatibility (first stock)
+WATCHED_TICKER = WATCHED_STOCKS[0]["ticker"]
+WATCHED_COMPANY = WATCHED_STOCKS[0]["company"]
+RSS_URL = WATCHED_STOCKS[0]["rss_url"]
 
 # Alpha Vantage (price data)
 ALPHA_VANTAGE_KEY = os.environ.get("ALPHA_VANTAGE_KEY", "")
@@ -56,6 +77,16 @@ DRAWDOWN_FROM_PEAK_PCT = 5.0    # If we've pulled back 5% from peak, protect gai
 # The system can override report advice if it detects these conditions
 OVERRIDE_PRICE_MOVE_PCT = 8.0     # >8% move since report = check if horse bolted
 OVERRIDE_MARKET_CRASH_PCT = -3.0  # S&P down >3% = market crash override
+
+# Duck-and-cover: sell before a known storm, rebuy after the wind passes
+DUCK_COVER_ENABLED = True
+DUCK_SELL_MINUTES_AFTER_OPEN = 0    # Sell at market open (9:30 ET / 14:30 UTC)
+DUCK_REBUY_MINUTES_AFTER_OPEN = 60  # Re-buy at 10:30 ET / 15:30 UTC
+DUCK_MIN_CONFIDENCE = 60            # Only duck-and-cover if we'd re-enter (report conf >= this)
+
+# Pre-market DD: before NYSE opens, check HK tape and overnight news
+PREMARKET_DD_ENABLED = True
+PREMARKET_WINDOW_HOURS_BEFORE_OPEN = 2.0  # Start pre-market DD 2h before NYSE open (12:30 UTC)
 
 # Tracking
 TRACKING_WINDOW_HOURS = 720  # 30 days - much longer than hedgefund tracker

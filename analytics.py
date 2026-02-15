@@ -18,12 +18,12 @@ from db import (
 logger = logging.getLogger("companywatch.analytics")
 
 
-def generate_analytics():
+def generate_analytics(ticker=None):
     """
     Generate comprehensive analytics for report rendering.
     Returns a dict with all data needed for the HTML report.
     """
-    ticker = WATCHED_TICKER
+    ticker = ticker or WATCHED_TICKER
     conn = get_db()
 
     # Current positions

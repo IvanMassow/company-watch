@@ -13,7 +13,7 @@ import logging
 from datetime import datetime, timezone
 
 from analytics import generate_analytics
-from config import REPORTS_DIR, WATCHED_TICKER
+from config import REPORTS_DIR, WATCHED_TICKER, WATCHED_STOCKS
 
 logger = logging.getLogger("companywatch.report")
 
@@ -48,9 +48,13 @@ def _pnl_arrow(pnl):
     return '&#9644;'  # dash
 
 
-def generate_html_report():
-    """Generate the full HTML report and save to reports directory."""
-    data = generate_analytics()
+def generate_html_report(ticker=None):
+    """Generate the full HTML report and save to reports directory.
+    If ticker given, generates for that stock. Otherwise uses default.
+    Reports go into reports/<TICKER>/latest.html when multi-stock.
+    """
+    ticker = ticker or WATCHED_TICKER
+    data = generate_analytics(ticker=ticker)
     s = data['summary']
 
     now = datetime.now(timezone.utc)
@@ -62,52 +66,103 @@ def generate_html_report():
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Company Watch: {ticker} | {timestamp}</title>
+<!-- Open Graph / Social sharing preview -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="NOAH Company Watch - {ticker}">
+<meta property="og:description" content="Single stock intelligence. AI-managed trading vs buy-and-hold benchmark.">
+<meta property="og:image" content="https://ivanmassow.github.io/company-watch/og-image.png">
+<meta property="og:url" content="https://ivanmassow.github.io/company-watch/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="NOAH Company Watch - {ticker}">
+<meta name="twitter:description" content="Single stock intelligence. AI-managed trading vs buy-and-hold benchmark.">
+<meta name="twitter:image" content="https://ivanmassow.github.io/company-watch/og-image.png">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&family=Montserrat:wght@500;700&display=swap');
 
+:root {{
+    --ink: #262a33;
+    --ink-light: #3d424d;
+    --ink-subtle: #73788a;
+    --grey-300: #d1d5db;
+    --grey-400: #9ea2b0;
+    --paper: #FFF1E5;
+    --accent: #0d7680;
+    --accent-light: #1a9ba5;
+    --green: #16a34a;
+    --red: #cc0000;
+    --gold: #d97706;
+    --blush: #ffe4d6;
+}}
 * {{ margin: 0; padding: 0; box-sizing: border-box; }}
 
 body {{
     font-family: 'Lato', sans-serif;
-    background: #FFF1E5;
-    color: #33302e;
+    background: var(--paper);
+    color: var(--ink);
     line-height: 1.6;
-    padding: 0;
+    padding-top: 56px;
 }}
 
 .container {{
-    max-width: 1100px;
+    max-width: 1120px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 0 2rem;
 }}
 
-/* Header */
-.header {{
-    background: linear-gradient(135deg, #0d7680, #1a9ba5);
-    color: white;
-    padding: 30px 40px;
-    border-radius: 12px;
-    margin-bottom: 24px;
+/* Fixed NOAH header bar */
+.nav-header {{
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: var(--ink); height: 56px;
+    display: flex; align-items: center; padding: 0 2rem;
 }}
-.header h1 {{
+.nav-header .logo {{
+    font-family: 'Montserrat', sans-serif; font-weight: 700;
+    color: #fff; font-size: 1.3rem; letter-spacing: 0.08em;
+    text-transform: uppercase; text-decoration: none;
+}}
+.nav-header .nav {{ display: flex; gap: 1.5rem; margin-left: 3rem; }}
+.nav-header .nav a {{
+    color: var(--grey-400); text-decoration: none;
+    font-size: 0.82rem; letter-spacing: 0.04em;
+    transition: color 0.2s;
+}}
+.nav-header .nav a:hover {{ color: #fff; }}
+.nav-header .nav a.active {{ color: #fff; }}
+.nav-header .meta {{
+    margin-left: auto; color: var(--grey-400);
+    font-size: 0.78rem; letter-spacing: 0.02em;
+}}
+
+/* Hero */
+.hero {{
+    background: var(--ink); color: #fff;
+    padding: 3rem 2rem 2.5rem;
+    margin-top: -56px; padding-top: calc(56px + 2.5rem);
+}}
+.hero .subtitle {{
+    font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: #FFA089; margin-bottom: 0.5rem;
+}}
+.hero h1 {{
     font-family: 'Playfair Display', serif;
-    font-size: 2.2em;
-    margin-bottom: 4px;
+    font-size: clamp(2rem, 4.5vw, 3rem); font-weight: 700;
+    letter-spacing: -0.01em; margin-bottom: 0.5rem;
 }}
-.header .subtitle {{
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.9em;
-    opacity: 0.9;
-}}
-.header .price-hero {{
+.hero .price-hero {{
     font-family: 'Montserrat', sans-serif;
     font-size: 2.8em;
     font-weight: 700;
-    margin: 16px 0 8px;
+    margin: 12px 0 6px;
 }}
-.header .price-change {{
+.hero .price-change {{
     font-size: 1.1em;
-    opacity: 0.9;
+    color: var(--grey-300);
+}}
+.hero .hero-meta {{
+    font-size: 0.78rem;
+    color: var(--grey-400);
+    margin-top: 12px;
 }}
 
 /* Section headers */
@@ -250,42 +305,76 @@ tr:hover {{ background: #fdf8f4; }}
     min-height: 200px;
 }}
 
-/* Footer */
-.footer {{
-    text-align: center;
-    padding: 24px;
-    color: #9ea2b0;
-    font-size: 0.8em;
-    margin-top: 32px;
-}}
-
 /* Responsive */
 @media (max-width: 768px) {{
     .lines-grid {{ grid-template-columns: 1fr; }}
-    .header h1 {{ font-size: 1.6em; }}
-    .header .price-hero {{ font-size: 2em; }}
+    .hero h1 {{ font-size: 1.6em; }}
+    .hero .price-hero {{ font-size: 2em; }}
+    .nav-header {{ padding: 0 1rem; }}
+    .nav-header .nav {{ margin-left: 1.5rem; gap: 0.8rem; }}
+    .nav-header .meta {{ display: none; }}
+    .container {{ padding: 0 1rem; }}
 }}
 </style>
 </head>
 <body>
-<div class="container">
-""".format(ticker=WATCHED_TICKER, timestamp=timestamp)
 
-    # === HEADER ===
+<!-- NOAH Header Bar -->
+<div class="nav-header">
+    <a href="https://ivanmassow.github.io/noah-dashboard/" class="logo">NOAH</a>
+    <div class="nav">
+        <a href="#arena">Arena</a>
+        <a href="#ledger">Ledger</a>
+        <a href="#scoreboard">Scoreboard</a>
+        <span style="color:rgba(255,255,255,0.15)">|</span>
+        <a href="https://ivanmassow.github.io/polyhunter/">Poly Market</a>
+        <a href="https://ivanmassow.github.io/hedgefund-tracker/">Hedge Fund</a>
+        <a href="https://ivanmassow.github.io/company-watch/">Company Watch</a>
+    </div>
+    <div class="meta">Company Watch &middot; {ticker}</div>
+</div>
+""".format(ticker=ticker, timestamp=timestamp)
+
+    # === HERO with stock picker dropdown ===
     change_pct = data['latest_price'].get('change_pct', 0) if data['latest_price'] else 0
     change_arrow = _pnl_arrow(change_pct)
     change_color = _pnl_color(change_pct)
 
+    # Build stock picker if more than one stock
+    stock_picker = ''
+    if len(WATCHED_STOCKS) > 1:
+        picker_items = ''
+        for st in WATCHED_STOCKS:
+            active_cls = ' style="color:#fff;font-weight:700"' if st['ticker'] == ticker else ''
+            picker_items += '<a href="../{t}/latest.html" style="display:block;padding:6px 16px;color:var(--grey-300);text-decoration:none;font-size:0.85rem;transition:color 0.2s"{cls}>{t} &middot; {c}</a>'.format(
+                t=st['ticker'], c=st['company'], cls=active_cls)
+        stock_picker = """
+        <div style="position:relative;float:right;margin-top:-20px" class="stock-picker">
+            <button onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='block'?'none':'block'"
+                style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:#fff;padding:8px 16px;border-radius:6px;cursor:pointer;font-family:Montserrat,sans-serif;font-size:0.8rem;font-weight:700;letter-spacing:0.05em">
+                {current} &#9662;
+            </button>
+            <div style="display:none;position:absolute;right:0;top:100%;margin-top:4px;background:var(--ink);border:1px solid rgba(255,255,255,0.15);border-radius:6px;min-width:200px;padding:6px 0;z-index:50;box-shadow:0 8px 24px rgba(0,0,0,0.3)">
+                {items}
+            </div>
+        </div>""".format(current=ticker, items=picker_items)
+
     html += """
-<div class="header">
-    <div class="subtitle">COMPANY WATCH</div>
-    <h1>{ticker}</h1>
-    <div class="price-hero">${price:.2f}</div>
-    <div class="price-change" style="color:{cc}">{arrow} {change:+.2f}% today</div>
-    <div class="subtitle" style="margin-top:12px">{timestamp}</div>
+<div class="hero">
+    <div class="container">
+        {picker}
+        <div class="subtitle">Company Watch &middot; Stock Intelligence</div>
+        <h1>{ticker}</h1>
+        <div class="price-hero">${price:.2f}</div>
+        <div class="price-change" style="color:{cc}">{arrow} {change:+.2f}% today</div>
+        <div class="hero-meta">{timestamp}</div>
+    </div>
 </div>
+
+<div class="container">
 """.format(
-        ticker=WATCHED_TICKER,
+        picker=stock_picker,
+        ticker=ticker,
         price=s['current_price'],
         cc=change_color,
         arrow=change_arrow,
@@ -294,7 +383,7 @@ tr:hover {{ background: #fdf8f4; }}
     )
 
     # === ACT 1: THE ARENA ===
-    html += '<h2 class="act-header">Act I: The Arena</h2>'
+    html += '<h2 class="act-header" id="arena">Act I: The Arena</h2>'
 
     # Current stance badge
     stance = s.get('active_state', 'FLAT')
@@ -305,23 +394,68 @@ tr:hover {{ background: #fdf8f4; }}
     active_pos = data.get('active_position')
     stance_from_pos = 'FADE'
     stance_conf = 0
+    report_conf = 0
+    house_conf = 0
+    is_ducking = False
     if active_pos:
         stance_from_pos = active_pos.get('current_stance', 'FADE')
         stance_conf = active_pos.get('stance_confidence', 0) or 0
+        report_conf = active_pos.get('report_confidence', 0) or 0
+        house_conf = active_pos.get('house_confidence', 0) or 0
+        is_ducking = bool(active_pos.get('is_ducking'))
+
+    # Dual confidence: report vs house
+    conf_diff = house_conf - report_conf
+    if conf_diff > 5:
+        conf_verdict = 'House amplified'
+        conf_icon = '&#9650;'  # up
+        conf_verdict_color = '#16a34a'
+    elif conf_diff < -5:
+        conf_verdict = 'House knocked down'
+        conf_icon = '&#9660;'  # down
+        conf_verdict_color = '#cc0000'
+    else:
+        conf_verdict = 'House agrees'
+        conf_icon = '&#9644;'  # flat
+        conf_verdict_color = '#73788a'
+
+    duck_badge = ''
+    if is_ducking:
+        duck_badge = ' <span style="background:#fef3c7;color:#d97706;padding:3px 10px;border-radius:12px;font-size:0.75em;font-weight:700;margin-left:8px">DUCK &amp; COVER</span>'
 
     html += """
 <div class="card">
     <div class="card-title">Current Stance</div>
-    <span class="stance-badge" style="background:{bg};color:{fg}">{stance}</span>
-    <span style="margin-left:12px;font-size:0.9em;color:#73788a">
-        Confidence: {conf:.0f}%
-    </span>
+    <div style="margin-bottom:12px">
+        <span class="stance-badge" style="background:{bg};color:{fg}">{stance}</span>
+        {duck}
+    </div>
+    <div style="display:flex;gap:24px;flex-wrap:wrap">
+        <div style="text-align:center;min-width:100px">
+            <div style="font-family:Montserrat,sans-serif;font-size:1.6em;font-weight:700;color:#0d7680">{report_conf:.0f}%</div>
+            <div style="font-size:0.75em;color:#73788a;text-transform:uppercase;letter-spacing:0.05em">Report</div>
+        </div>
+        <div style="text-align:center;min-width:100px">
+            <div style="font-family:Montserrat,sans-serif;font-size:1.6em;font-weight:700;color:#262a33">{house_conf:.0f}%</div>
+            <div style="font-size:0.75em;color:#73788a;text-transform:uppercase;letter-spacing:0.05em">House</div>
+        </div>
+        <div style="text-align:center;min-width:120px;padding-top:4px">
+            <div style="font-size:0.9em;color:{vc}">{vi} {verdict}</div>
+            <div style="font-size:0.75em;color:#73788a;margin-top:2px">Effective: {eff:.0f}%</div>
+        </div>
+    </div>
 </div>
 """.format(
         stance=stance_from_pos,
         bg=_stance_bg(stance_from_pos),
         fg=_stance_color(stance_from_pos),
-        conf=stance_conf,
+        duck=duck_badge,
+        report_conf=report_conf,
+        house_conf=house_conf,
+        vc=conf_verdict_color,
+        vi=conf_icon,
+        verdict=conf_verdict,
+        eff=stance_conf,
     )
 
     # Two-line comparison cards
@@ -388,7 +522,9 @@ tr:hover {{ background: #fdf8f4; }}
 <div class="report-card" style="border-left-color:{sc}">
     <div class="card-title">Latest Report ({date})</div>
     <span class="stance-badge" style="background:{bg};color:{fg}">{stance}</span>
-    <span style="margin-left:8px;font-size:0.85em">Confidence: {conf:.0f}%</span>
+    <span style="margin-left:8px;font-size:0.85em">Report Confidence: {conf:.0f}%</span>
+    <span style="margin-left:8px;font-size:0.85em;color:#0d7680">|</span>
+    <span style="margin-left:8px;font-size:0.85em">House: {hconf:.0f}%</span>
     <p style="margin-top:8px;font-size:0.9em;color:#555">{rationale}</p>
 </div>
 """.format(
@@ -398,25 +534,29 @@ tr:hover {{ background: #fdf8f4; }}
             fg=_stance_color(r_stance),
             stance=r_stance,
             conf=r_conf,
+            hconf=house_conf,
             rationale=r_rationale[:300],
         )
 
     # === ACT 2: THE LEDGER ===
-    html += '<h2 class="act-header">Act II: The Ledger</h2>'
+    html += '<h2 class="act-header" id="ledger">Act II: The Ledger</h2>'
 
     # Decision log table
     html += '<div class="card"><div class="card-title">Recent Decisions</div>'
-    html += '<table><tr><th>Time</th><th>Type</th><th>From</th><th>To</th><th>Conf</th><th>Trigger</th><th>Reason</th></tr>'
+    html += '<table><tr><th>Time</th><th>Type</th><th>From</th><th>To</th><th>Report</th><th>House</th><th>Trigger</th><th>Reason</th></tr>'
 
     for d in data['decisions'][:15]:
         ts = (d.get('timestamp', '') or '')[:16]
         override_marker = ' &#9889;' if d.get('is_override') else ''
+        r_conf = d.get('report_confidence')
+        h_conf = d.get('house_confidence')
         html += """<tr>
             <td>{ts}</td>
             <td>{dtype}{override}</td>
             <td><span style="color:{ofc}">{old}</span></td>
             <td><span style="color:{nfc}">{new}</span></td>
-            <td>{conf}</td>
+            <td>{rconf}</td>
+            <td>{hconf}</td>
             <td>{trigger}</td>
             <td style="font-size:0.8em">{reason}</td>
         </tr>""".format(
@@ -427,7 +567,8 @@ tr:hover {{ background: #fdf8f4; }}
             old=d.get('old_stance', ''),
             nfc=_stance_color(d.get('new_stance', '')),
             new=d.get('new_stance', ''),
-            conf='{:.0f}%'.format(d['confidence']) if d.get('confidence') else '',
+            rconf='{:.0f}%'.format(r_conf) if r_conf else '',
+            hconf='{:.0f}%'.format(h_conf) if h_conf else '',
             trigger=d.get('trigger', ''),
             reason=(d.get('reason', '') or '')[:120],
         )
@@ -480,7 +621,7 @@ tr:hover {{ background: #fdf8f4; }}
         html += '</table></div>'
 
     # === ACT 3: THE SCOREBOARD ===
-    html += '<h2 class="act-header">Act III: The Scoreboard</h2>'
+    html += '<h2 class="act-header" id="scoreboard">Act III: The Scoreboard</h2>'
 
     ts = data.get('trade_stats', {})
     da = data.get('decision_analysis', {})
@@ -593,26 +734,46 @@ tr:hover {{ background: #fdf8f4; }}
             )
         html += '</div>'
 
-    # Footer
+    # Footer (NOAH style)
     html += """
-<div class="footer">
-    Company Watch &middot; {ticker} &middot; Generated {timestamp}<br>
-    Active line: AI-managed trading | Passive line: Buy &amp; hold benchmark<br>
-    <em>Paper trading only &middot; Not financial advice</em>
-</div>
-</div>
-</body>
-</html>""".format(ticker=WATCHED_TICKER, timestamp=timestamp)
+</div><!-- end container -->
 
-    # Save report
-    os.makedirs(REPORTS_DIR, exist_ok=True)
+<footer style="background:var(--ink);padding:2rem;text-align:center;margin-top:3rem">
+    <a href="https://ivanmassow.github.io/noah-dashboard/" style="text-decoration:none"><div style="font-family:Montserrat,sans-serif;font-weight:700;color:#fff;font-size:1rem;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px">NOAH</div></a>
+    <p style="font-size:0.82rem;color:rgba(255,241,229,0.5);margin-bottom:8px">
+        Company Watch &mdash; single stock intelligence tracking {ticker}.
+        Active line: AI-managed trading | Passive line: Buy &amp; hold benchmark.
+    </p>
+    <p style="font-size:0.72rem;color:rgba(255,241,229,0.35);margin-bottom:8px">
+        <a href="https://ivanmassow.github.io/polyhunter/" style="color:rgba(255,241,229,0.5);text-decoration:none">Poly Market</a> &middot;
+        <a href="https://ivanmassow.github.io/hedgefund-tracker/" style="color:rgba(255,241,229,0.5);text-decoration:none">Hedge Fund</a> &middot;
+        <a href="https://ivanmassow.github.io/company-watch/" style="color:rgba(255,241,229,0.5);text-decoration:none">Company Watch</a>
+    </p>
+    <p style="font-size:0.72rem;color:rgba(255,241,229,0.25)">
+        Report generated {timestamp}. All positions are paper trades for analytical purposes only. Not investment advice.
+    </p>
+</footer>
+
+</body>
+</html>""".format(ticker=ticker, timestamp=timestamp)
+
+    # Save report — per-stock subdirectory when multi-stock
     ts_file = now.strftime('%Y%m%d_%H%M')
 
-    latest_path = os.path.join(REPORTS_DIR, 'latest.html')
+    if len(WATCHED_STOCKS) > 1:
+        # Multi-stock: reports/<TICKER>/latest.html
+        stock_dir = os.path.join(REPORTS_DIR, ticker)
+        os.makedirs(stock_dir, exist_ok=True)
+        latest_path = os.path.join(stock_dir, 'latest.html')
+        timestamped_path = os.path.join(stock_dir, 'report_{}.html'.format(ts_file))
+    else:
+        # Single stock: reports/latest.html (backward compatible)
+        os.makedirs(REPORTS_DIR, exist_ok=True)
+        latest_path = os.path.join(REPORTS_DIR, 'latest.html')
+        timestamped_path = os.path.join(REPORTS_DIR, 'companywatch_report_{}.html'.format(ts_file))
+
     with open(latest_path, 'w') as f:
         f.write(html)
-
-    timestamped_path = os.path.join(REPORTS_DIR, 'companywatch_report_{}.html'.format(ts_file))
     with open(timestamped_path, 'w') as f:
         f.write(html)
 
@@ -681,7 +842,7 @@ def _build_price_chart(price_history, active_pos, passive_pos):
         {passive}
         <polyline points="{points}" fill="none" stroke="#0d7680" stroke-width="2"/>
         <circle cx="{last_x:.1f}" cy="{last_y:.1f}" r="4" fill="#0d7680"/>
-        <text x="{lx:.1f}" y="{ly:.1f}" font-size="11" fill="#33302e" font-weight="700">${last_p:.2f}</text>
+        <text x="{lx:.1f}" y="{ly:.1f}" font-size="11" fill="#262a33" font-weight="700">${last_p:.2f}</text>
         <text x="{px}" y="{h}" font-size="9" fill="#9ea2b0">${min:.2f}</text>
         <text x="{px}" y="{py2}" font-size="9" fill="#9ea2b0">${max:.2f}</text>
     </svg>

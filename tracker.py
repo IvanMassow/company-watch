@@ -89,11 +89,11 @@ def calculate_pnl(entry_price, current_price, direction="LONG"):
     return (current_price - entry_price) / entry_price * 100
 
 
-def track_prices():
+def track_prices(ticker=None):
     """
     Fetch current price and record snapshots for both active and passive lines.
     """
-    ticker = WATCHED_TICKER
+    ticker = ticker or WATCHED_TICKER
     now = datetime.now(timezone.utc)
 
     # Fetch price
@@ -173,12 +173,12 @@ def track_prices():
     return True
 
 
-def ensure_passive_position():
+def ensure_passive_position(ticker=None):
     """
     Ensure the passive (buy-and-hold) position exists.
     Created on first price fetch if not already present.
     """
-    ticker = WATCHED_TICKER
+    ticker = ticker or WATCHED_TICKER
     passive = get_passive_position(ticker)
     if passive:
         return passive
@@ -201,12 +201,12 @@ def ensure_passive_position():
     return get_passive_position(ticker)
 
 
-def update_daily_summary():
+def update_daily_summary(ticker=None):
     """
     Update the daily summary table with today's data.
     Called after each price tracking cycle.
     """
-    ticker = WATCHED_TICKER
+    ticker = ticker or WATCHED_TICKER
     today = datetime.now(timezone.utc).strftime('%Y-%m-%d')
     conn = get_db()
 

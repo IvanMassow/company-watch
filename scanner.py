@@ -11,7 +11,7 @@ from html.parser import HTMLParser
 
 import requests
 
-from config import RSS_URL, WATCHED_TICKER, WATCHED_COMPANY
+from config import RSS_URL, WATCHED_TICKER, WATCHED_COMPANY, WATCHED_STOCKS
 from db import get_db
 
 logger = logging.getLogger("companywatch.scanner")
@@ -49,19 +49,25 @@ def html_to_text(html):
     return extractor.get_text()
 
 
-def fetch_rss():
-    """Fetch RSS feed and return items relevant to our watched stock."""
+def fetch_rss(rss_url=None, ticker=None, company=None):
+    """Fetch RSS feed and return items relevant to our watched stock.
+    Accepts optional params for multi-stock support.
+    """
+    rss_url = rss_url or RSS_URL
+    ticker = ticker or WATCHED_TICKER
+    company = company or WATCHED_COMPANY
+
     try:
-        resp = requests.get(RSS_URL, timeout=30)
+        resp = requests.get(rss_url, timeout=30)
         resp.raise_for_status()
     except Exception as e:
-        logger.error("RSS fetch failed: %s", e)
+        logger.error("RSS fetch failed for %s: %s", ticker, e)
         return []
 
     try:
         root = ET.fromstring(resp.content)
     except ET.ParseError as e:
-        logger.error("RSS parse failed: %s", e)
+        logger.error("RSS parse failed for %s: %s", ticker, e)
         return []
 
     items = []
@@ -74,8 +80,8 @@ def fetch_rss():
 
         # Filter: only process reports mentioning our stock
         title_lower = title.lower()
-        ticker_lower = WATCHED_TICKER.lower()
-        company_lower = WATCHED_COMPANY.lower()
+        ticker_lower = ticker.lower()
+        company_lower = company.lower()
 
         if ticker_lower in title_lower or company_lower in title_lower:
             items.append({
@@ -84,10 +90,11 @@ def fetch_rss():
                 'description': desc,
                 'guid': guid,
                 'pub_date': pub_date,
+                '_ticker': ticker,  # tag with ticker for multi-stock
             })
             logger.info("Found relevant report: %s", title)
 
-    logger.info("RSS scan: %d relevant items from feed", len(items))
+    logger.info("RSS scan (%s): %d relevant items from feed", ticker, len(items))
     return items
 
 
@@ -249,11 +256,12 @@ def fetch_report_content(url):
         return None, None
 
 
-def ingest_report(item):
+def ingest_report(item, ticker=None):
     """
     Ingest a single RSS item into the database.
     Returns True if new report was ingested.
     """
+    ticker = ticker or item.get('_ticker') or WATCHED_TICKER
     conn = get_db()
 
     # Check if already ingested
@@ -303,7 +311,7 @@ def ingest_report(item):
             report_html, report_text
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     """, (
-        WATCHED_TICKER,
+        ticker,
         item['link'],
         item['title'],
         pub_date,
@@ -329,18 +337,36 @@ def ingest_report(item):
     return True
 
 
-def scan():
-    """Main scan function: fetch RSS, ingest new reports."""
-    items = fetch_rss()
-    if not items:
-        logger.info("No new reports found")
-        return 0
+def scan(ticker=None, company=None, rss_url=None):
+    """Main scan function: fetch RSS, ingest new reports.
+    If no params given, scans all stocks in WATCHED_STOCKS.
+    """
+    if ticker:
+        # Single stock scan
+        items = fetch_rss(rss_url=rss_url, ticker=ticker, company=company)
+        if not items:
+            logger.info("No new reports found for %s", ticker)
+            return 0
+        ingested = 0
+        for item in items:
+            if ingest_report(item, ticker=ticker):
+                ingested += 1
+        if ingested:
+            logger.info("Ingested %d new report(s) for %s", ingested, ticker)
+        return ingested
 
-    ingested = 0
-    for item in items:
-        if ingest_report(item):
-            ingested += 1
+    # Multi-stock: scan all watched stocks
+    total_ingested = 0
+    for stock in WATCHED_STOCKS:
+        items = fetch_rss(
+            rss_url=stock['rss_url'],
+            ticker=stock['ticker'],
+            company=stock['company'],
+        )
+        for item in items:
+            if ingest_report(item, ticker=stock['ticker']):
+                total_ingested += 1
 
-    if ingested:
-        logger.info("Ingested %d new report(s)", ingested)
-    return ingested
+    if total_ingested:
+        logger.info("Ingested %d new report(s) across all stocks", total_ingested)
+    return total_ingested

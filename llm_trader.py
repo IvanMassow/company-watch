@@ -131,10 +131,17 @@ CURRENT PRICE DATA:
 Assess this report. Should we follow its recommendation?
 Consider: Has the horse bolted? Any macro override? Is this a profit-taking opportunity?
 
+IMPORTANT: You must provide your OWN house confidence percentage (0-100).
+This can be higher than the report (you're MORE confident because your research confirms it)
+or lower (you're LESS confident because something worries you).
+For example: report says HOLD 62%, but your research says actually BUY 83%.
+Or: report says BUY 70%, but you think SELL with house confidence -40% (negative = opposite direction).
+
 Respond in JSON:
 {{
     "decision": "BUY|SELL|HOLD|FADE",
     "confidence": "HIGH|MEDIUM|LOW",
+    "house_confidence_pct": 0-100,
     "reason": "2-3 sentence explanation",
     "agrees_with_report": true/false,
     "override_reason": "if disagreeing, why"
@@ -286,6 +293,128 @@ Respond in JSON:
         stance=latest_report.get('report_stance', 'N/A') if latest_report else 'N/A',
         conf=latest_report.get('report_confidence', 0) if latest_report else 0,
         rationale=latest_report.get('report_rationale', 'N/A') if latest_report else 'N/A',
+    )
+
+    return _call_llm(SYSTEM_PROMPT, prompt, max_tokens=512)
+
+
+def premarket_check(current_position, price_data, latest_report):
+    """
+    Pre-market DD: runs BEFORE NYSE opens.
+    Checks HK tape, overnight news, and whether to duck-and-cover at open.
+
+    Returns:
+    {
+        "action": "HOLD" | "EXIT" | "DUCK",
+        "urgency": "HIGH" | "MEDIUM" | "LOW",
+        "duck_and_cover": true/false,
+        "reason": "explanation"
+    }
+    """
+    pos_state = 'FLAT'
+    pos_direction = None
+    pos_pnl = None
+
+    if current_position and current_position.get('state') != 'FLAT':
+        pos_state = current_position['state']
+        pos_direction = current_position.get('direction')
+        entry = current_position.get('entry_price', 0)
+        if entry and price_data:
+            from tracker import calculate_pnl
+            pos_pnl = calculate_pnl(entry, price_data.get('price', 0), pos_direction or 'LONG')
+
+    prompt = """PRE-MARKET DUE DILIGENCE
+
+This is your MOST IMPORTANT job before NYSE opens. You are checking overnight conditions.
+
+CURRENT POSITION:
+- State: {pos_state}
+- Direction: {pos_direction}
+- Current P&L: {pos_pnl}
+
+LATEST REPORT:
+- Stance: {report_stance}
+- Confidence: {report_conf}%
+- Rationale: {report_rationale}
+
+CURRENT PRICE (may be delayed):
+- Last Price: ${price:.2f}
+- Day Change: {change:.2f}%
+
+PRE-MARKET CHECKS TO PERFORM:
+1. Has the Hong Kong market (where BABA also trades as 9988.HK) already reacted overnight?
+2. Are there any major overnight news events that change the thesis?
+3. Is there a macro storm coming (US-China tensions, Fed announcements, earnings surprises)?
+4. Should we DUCK AND COVER? (sell at market open 9:30 ET, wait for the storm to pass,
+   then re-buy around 10:30 ET when the panic selling is done)
+
+Duck-and-cover is for when: our thesis is STILL VALID long-term, but something bigger
+is going to floor the stock temporarily. We want to sell at 9:30 and re-buy at 10:30
+when the wind has been taken out of the fall.
+
+Respond in JSON:
+{{
+    "action": "HOLD|EXIT|DUCK",
+    "urgency": "HIGH|MEDIUM|LOW",
+    "duck_and_cover": true/false,
+    "reason": "2-3 sentence explanation"
+}}""".format(
+        pos_state=pos_state,
+        pos_direction=pos_direction or 'N/A',
+        pos_pnl='{:.2f}%'.format(pos_pnl) if pos_pnl is not None else 'N/A',
+        report_stance=latest_report.get('report_stance', 'N/A') if latest_report else 'N/A',
+        report_conf=latest_report.get('report_confidence', 0) if latest_report else 0,
+        report_rationale=latest_report.get('report_rationale', 'N/A') if latest_report else 'N/A',
+        price=price_data.get('price', 0) if price_data else 0,
+        change=price_data.get('change_pct', 0) if price_data else 0,
+    )
+
+    return _call_llm(SYSTEM_PROMPT, prompt, max_tokens=512)
+
+
+def assess_rebuy(report, price_data):
+    """
+    After a duck-and-cover sell, assess whether it's safe to re-enter.
+    Called ~60 min after market open when initial selling pressure should have eased.
+
+    Returns:
+    {
+        "action": "REBUY" | "STAY_OUT",
+        "house_confidence_pct": 0-100,
+        "reason": "explanation"
+    }
+    """
+    prompt = """DUCK-AND-COVER REBUY ASSESSMENT
+
+We sold at market open to avoid a storm. It's now ~60 minutes after open.
+Should we re-enter the position?
+
+REPORT:
+- Stance: {stance}
+- Confidence: {conf}%
+- Rationale: {rationale}
+
+CURRENT PRICE:
+- Price: ${price:.2f}
+- Day Change: {change:.2f}%
+
+Consider:
+1. Has the selling pressure eased?
+2. Is the original thesis still valid?
+3. Is the price now BETTER than where we sold (we made money by ducking)?
+4. Or has something fundamentally changed and we should stay out?
+
+Respond in JSON:
+{{
+    "action": "REBUY|STAY_OUT",
+    "house_confidence_pct": 0-100,
+    "reason": "1-2 sentence explanation"
+}}""".format(
+        stance=report.get('report_stance', 'N/A'),
+        conf=report.get('report_confidence', 0),
+        rationale=report.get('report_rationale', 'N/A'),
+        price=price_data.get('price', 0) if price_data else 0,
+        change=price_data.get('change_pct', 0) if price_data else 0,
     )
 
     return _call_llm(SYSTEM_PROMPT, prompt, max_tokens=512)

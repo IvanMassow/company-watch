@@ -100,8 +100,16 @@ def init_db():
             -- Current stance
             current_stance TEXT DEFAULT 'FADE',
             stance_confidence REAL DEFAULT 0,
+            report_confidence REAL DEFAULT 0,
+            house_confidence REAL DEFAULT 0,
             stance_updated_at TEXT,
             stance_report_id INTEGER REFERENCES reports(id),
+
+            -- Duck-and-cover state
+            is_ducking INTEGER DEFAULT 0,
+            duck_exit_price REAL,
+            duck_exit_time TEXT,
+            duck_reason TEXT,
 
             -- Override tracking
             was_overridden INTEGER DEFAULT 0,
@@ -167,6 +175,8 @@ def init_db():
             old_stance TEXT,
             new_stance TEXT,
             confidence REAL,
+            report_confidence REAL,
+            house_confidence REAL,
             reason TEXT,
 
             -- Market context at decision time
