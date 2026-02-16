@@ -181,7 +181,7 @@ def update_stance(ticker, stance, confidence, reason, report_id=None,
     )
 
 
-def process_new_report(report, llm_trader=None):
+def process_new_report(report, llm_trader=None, ticker=None):
     """
     Process a new report and make trading decisions.
     This is the PRIMARY decision input - daily report from Company Watch.
@@ -193,7 +193,7 @@ def process_new_report(report, llm_trader=None):
     The house can agree (amplify to 83%), disagree (knock down to 40%),
     or even flip direction (e.g. report says HOLD 62% but house says SELL -40%).
     """
-    ticker = WATCHED_TICKER
+    ticker = ticker or WATCHED_TICKER
     report_stance = report.get('report_stance', 'HOLD')
     report_confidence = report.get('report_confidence', 50) or 50
     report_id = report.get('id')
@@ -223,7 +223,7 @@ def process_new_report(report, llm_trader=None):
 
     if llm_trader:
         time.sleep(AV_RATE_LIMIT)
-        llm_result = llm_trader.assess_report(report, price_data, pos)
+        llm_result = llm_trader.assess_report(report, price_data, pos, ticker=ticker)
         if llm_result:
             llm_stance = llm_result.get('decision', '').upper()
             llm_conf_level = llm_result.get('confidence', 'MEDIUM')
@@ -324,8 +324,8 @@ def premarket_dd(llm_trader=None, ticker=None):
     # Get current price (may be delayed if market closed)
     price_data = fetch_price_av(ticker)
 
-    # Ask LLM to do pre-market assessment
-    llm_result = llm_trader.premarket_check(pos, price_data, report)
+    # Ask LLM to do pre-market assessment (with real market data)
+    llm_result = llm_trader.premarket_check(pos, price_data, report, ticker=ticker)
     if not llm_result:
         logger.info("Pre-market DD: LLM returned no result")
         return
@@ -447,7 +447,7 @@ def duck_and_cover_rebuy(llm_trader=None, ticker=None):
     house_confidence = report_conf
     if llm_trader:
         time.sleep(AV_RATE_LIMIT)
-        llm_result = llm_trader.assess_rebuy(report, price_data)
+        llm_result = llm_trader.assess_rebuy(report, price_data, ticker=ticker)
         if llm_result:
             action = llm_result.get('action', 'REBUY').upper()
             house_confidence = llm_result.get('house_confidence_pct', report_conf)
@@ -576,7 +576,7 @@ def autonomous_dd(llm_trader=None, ticker=None):
 
     # === CHECK 6: Soft stop-loss with LLM assessment ===
     if current_pnl <= LOSS_STOP_PCT and llm_trader:
-        llm_result = llm_trader.assess_loss(pos, price_data, report)
+        llm_result = llm_trader.assess_loss(pos, price_data, report, ticker=ticker)
         if llm_result and llm_result.get('action') == 'EXIT':
             exit_position(ticker, price,
                           "AI STOP: " + llm_result.get('reason', 'Thesis no longer valid'))
@@ -584,7 +584,7 @@ def autonomous_dd(llm_trader=None, ticker=None):
 
     # === CHECK 7: LLM autonomous assessment ===
     if llm_trader:
-        llm_result = llm_trader.autonomous_check(pos, price_data, report)
+        llm_result = llm_trader.autonomous_check(pos, price_data, report, ticker=ticker)
         if llm_result:
             action = llm_result.get('action', 'HOLD').upper()
             if action == 'EXIT':

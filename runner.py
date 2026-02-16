@@ -403,7 +403,7 @@ def _run_stock_cycle(ticker, llm_trader):
     if new_reports:
         report = get_latest_report(ticker)
         if report:
-            process_new_report(report, llm_trader)
+            process_new_report(report, llm_trader, ticker=ticker)
 
     # 3. Track prices
     track_prices(ticker=ticker)
@@ -497,7 +497,7 @@ def run():
                 for stock in WATCHED_STOCKS:
                     report = get_latest_report(stock['ticker'])
                     if report:
-                        process_new_report(report, llm_trader)
+                        process_new_report(report, llm_trader, ticker=stock['ticker'])
                 changed = True
 
         # Track prices (all stocks)
