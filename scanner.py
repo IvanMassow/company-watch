@@ -78,12 +78,16 @@ def fetch_rss(rss_url=None, ticker=None, company=None):
         guid = item.findtext('guid', '').strip()
         pub_date = item.findtext('pubDate', '').strip()
 
-        # Filter: only process reports mentioning our stock
-        title_lower = title.lower()
+        # Filter: check title AND description for our stock
+        # Multi-company reports have a generic title but list tickers in the body
+        searchable = (title + ' ' + desc).lower()
         ticker_lower = ticker.lower()
         company_lower = company.lower()
 
-        if ticker_lower in title_lower or company_lower in title_lower:
+        # Also match generic "company watch" reports that contain our ticker in body
+        is_company_watch_report = 'company watch' in title.lower()
+
+        if ticker_lower in searchable or company_lower in searchable or is_company_watch_report:
             items.append({
                 'title': title,
                 'link': link,
@@ -166,6 +170,76 @@ def parse_report_stance(text):
             confidence = float(end_match.group(1))
 
     return stance, confidence
+
+
+def extract_ticker_section(text, ticker):
+    """
+    Extract the section for a specific ticker from a multi-company report.
+    Reports have per-company sections like:
+      '2026-02-16 - Alibaba Group Holding Limited - BABA - HOLD - 52%'
+    followed by detailed analysis until the next company section.
+    Returns the ticker-specific text block, or the full text if not found.
+    """
+    # Find the section header for this ticker
+    # Pattern: "TICKER - STANCE - NN%"  or full line with date/company
+    pattern = re.compile(
+        r'^.*?\b' + re.escape(ticker) + r'\b.*?(?:BUY|SELL|HOLD|FADE)\s*[-:]\s*\d+',
+        re.IGNORECASE | re.MULTILINE
+    )
+    match = pattern.search(text)
+    if not match:
+        return text  # Fallback to full text
+
+    start = match.start()
+
+    # Find the next company section (another "DATE - Company - TICKER - STANCE - NN%")
+    # or end of text
+    next_section = re.search(
+        r'\n\S.*?\b(?:NYSE|NASDAQ|HKEX)\b\)',
+        text[match.end():]
+    )
+    if next_section:
+        end = match.end() + next_section.start()
+    else:
+        end = len(text)
+
+    return text[start:end]
+
+
+def parse_ticker_stance_from_table(text, ticker):
+    """
+    Parse stance and confidence for a specific ticker from the executive dashboard table.
+    Table rows look like:
+      | Alibaba Group Holding Limited | BABA | HOLD | 52% | negative | ...
+    Or in plain text after HTML stripping:
+      Alibaba Group Holding Limited
+      BABA
+      HOLD
+      52%
+    Also matches: '2026-02-16 - Company Name - TICKER - HOLD - 52%'
+    """
+    # Try the per-company section header pattern first
+    # "TICKER - HOLD - 52%" or "TICKER - HOLD - 52"
+    header_match = re.search(
+        r'\b' + re.escape(ticker) + r'\s*[-]\s*(BUY|SELL|HOLD|FADE)\s*[-]\s*(\d+)\s*%?',
+        text, re.IGNORECASE
+    )
+    if header_match:
+        stance = header_match.group(1).upper()
+        confidence = float(header_match.group(2))
+        return stance, confidence
+
+    # Try markdown table: | TICKER | **HOLD** | 52% |
+    table_match = re.search(
+        r'\b' + re.escape(ticker) + r'\b.*?\*{0,2}(BUY|SELL|HOLD|FADE)\*{0,2}\s*\|?\s*(\d+)\s*%?',
+        text, re.IGNORECASE
+    )
+    if table_match:
+        stance = table_match.group(1).upper()
+        confidence = float(table_match.group(2))
+        return stance, confidence
+
+    return None, None
 
 
 def parse_report_sections(text):
@@ -264,16 +338,18 @@ def ingest_report(item, ticker=None):
     ticker = ticker or item.get('_ticker') or WATCHED_TICKER
     conn = get_db()
 
+    # For multi-company reports, make guid unique per ticker
+    # so the same report is ingested once per watched stock
+    report_guid = item['guid'] + '::' + ticker if ticker else item['guid']
+
     # Check if already ingested
     existing = conn.execute(
-        "SELECT id FROM reports WHERE rss_guid=?", (item['guid'],)
+        "SELECT id FROM reports WHERE rss_guid=?", (report_guid,)
     ).fetchone()
     if existing:
         conn.close()
         return False
 
-    # Parse stance from title
-    stance, confidence = parse_report_stance(item['title'])
     pub_date = parse_pub_date(item['pub_date'])
 
     # Fetch full report content
@@ -287,12 +363,23 @@ def ingest_report(item, ticker=None):
     if report_text:
         combined_text += '\n' + report_text
 
-    # If we didn't get stance from title, try from content
+    # For multi-company reports: extract this ticker's specific stance/confidence
+    # from the executive dashboard table or section headers
+    stance, confidence = parse_ticker_stance_from_table(combined_text, ticker)
+
+    # Fallback: try generic parsing from title
+    if stance is None:
+        stance, confidence = parse_report_stance(item['title'])
+
+    # If still nothing, try from full content
     if stance is None:
         stance, confidence = parse_report_stance(combined_text)
 
-    # Parse sections from content
-    sections = parse_report_sections(combined_text)
+    # Extract this ticker's specific section for detailed parsing
+    ticker_text = extract_ticker_section(combined_text, ticker)
+
+    # Parse sections from the ticker-specific text (not the whole report)
+    sections = parse_report_sections(ticker_text)
 
     # If rationale is empty, use the description as rationale
     if not sections['rationale'] and desc_text:
@@ -315,7 +402,7 @@ def ingest_report(item, ticker=None):
         item['link'],
         item['title'],
         pub_date,
-        item['guid'],
+        report_guid,
         stance,
         confidence,
         sections['rationale'],

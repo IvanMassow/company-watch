@@ -68,65 +68,93 @@ def _all_tickers():
     return [s['ticker'] for s in WATCHED_STOCKS]
 
 
+def _export_stock_summary(ticker):
+    """Build dashboard summary dict for one stock."""
+    from analytics import generate_analytics
+    data = generate_analytics(ticker=ticker)
+    s = data['summary']
+
+    daily_list = data.get('daily', [])
+    latest_daily = daily_list[-1] if daily_list else {}
+    daily_active_pnl = latest_daily.get('active_pnl_pct', 0) or 0
+    daily_passive_pnl = latest_daily.get('passive_pnl_pct', 0) or 0
+
+    stock_data = {
+        'ticker': ticker,
+        'company': next((st['company'] for st in WATCHED_STOCKS if st['ticker'] == ticker), ticker),
+        'current_price': s['current_price'],
+        'active': {
+            'state': s['active_state'],
+            'direction': s['active_direction'],
+            'entry_price': s['active_entry_price'],
+            'unrealised_pnl': s['active_unrealised_pnl'],
+            'realised_pnl': s['active_realised_pnl'],
+            'total_pnl': s['active_total_pnl'],
+            'daily_pnl': daily_active_pnl,
+            'stance': None,
+            'confidence': None,
+        },
+        'passive': {
+            'entry_price': s['passive_entry_price'],
+            'pnl': s['passive_pnl'],
+            'daily_pnl': daily_passive_pnl,
+        },
+        'alpha': s['alpha'],
+        'total_trades': s['total_trades'],
+        'win_rate': s['win_rate'],
+        'days_tracked': s['days_tracked'],
+    }
+
+    pos = data.get('active_position')
+    if pos:
+        stock_data['active']['stance'] = pos.get('current_stance')
+        stock_data['active']['confidence'] = pos.get('stance_confidence')
+        stock_data['active']['report_confidence'] = pos.get('report_confidence')
+        stock_data['active']['house_confidence'] = pos.get('house_confidence')
+        stock_data['active']['is_ducking'] = bool(pos.get('is_ducking'))
+
+    return stock_data
+
+
 def export_dashboard_json(ticker=None):
     """Export a lightweight JSON summary for the Noah Dashboard.
-    If ticker given, exports for that stock. Otherwise exports for default.
+    Exports ALL watched stocks in a single summary.json.
     """
-    ticker = ticker or WATCHED_TICKER
     try:
-        from analytics import generate_analytics
-        data = generate_analytics(ticker=ticker)
-        s = data['summary']
+        from datetime import timezone as tz
+        now_iso = datetime.now(tz.utc).isoformat()
 
-        # Latest daily change (last entry in daily summaries)
-        daily_list = data.get('daily', [])
-        latest_daily = daily_list[-1] if daily_list else {}
-        daily_active_pnl = latest_daily.get('active_pnl_pct', 0) or 0
-        daily_passive_pnl = latest_daily.get('passive_pnl_pct', 0) or 0
+        stocks = []
+        for st in WATCHED_STOCKS:
+            try:
+                stock_data = _export_stock_summary(st['ticker'])
+                stocks.append(stock_data)
+            except Exception as e:
+                logger.error("Dashboard export failed for %s: %s", st['ticker'], e)
 
         dashboard = {
             'product': 'company_watch',
-            'ticker': ticker,
-            'generated_at': data['generated_at'],
-            'current_price': s['current_price'],
-            'active': {
-                'state': s['active_state'],
-                'direction': s['active_direction'],
-                'entry_price': s['active_entry_price'],
-                'unrealised_pnl': s['active_unrealised_pnl'],
-                'realised_pnl': s['active_realised_pnl'],
-                'total_pnl': s['active_total_pnl'],
-                'daily_pnl': daily_active_pnl,
-                'stance': None,
-                'confidence': None,
-            },
-            'passive': {
-                'entry_price': s['passive_entry_price'],
-                'pnl': s['passive_pnl'],
-                'daily_pnl': daily_passive_pnl,
-            },
-            'alpha': s['alpha'],
-            'total_trades': s['total_trades'],
-            'win_rate': s['win_rate'],
-            'days_tracked': s['days_tracked'],
+            'generated_at': now_iso,
+            'stock_count': len(stocks),
+            'stocks': stocks,
+            # Backward compat: also expose first stock at top level
+            'ticker': stocks[0]['ticker'] if stocks else '',
+            'current_price': stocks[0]['current_price'] if stocks else 0,
+            'active': stocks[0]['active'] if stocks else {},
+            'passive': stocks[0]['passive'] if stocks else {},
+            'alpha': stocks[0]['alpha'] if stocks else 0,
+            'total_trades': stocks[0]['total_trades'] if stocks else 0,
+            'win_rate': stocks[0]['win_rate'] if stocks else 0,
+            'days_tracked': stocks[0]['days_tracked'] if stocks else 0,
         }
-
-        # Add current stance and dual confidence
-        pos = data.get('active_position')
-        if pos:
-            dashboard['active']['stance'] = pos.get('current_stance')
-            dashboard['active']['confidence'] = pos.get('stance_confidence')
-            dashboard['active']['report_confidence'] = pos.get('report_confidence')
-            dashboard['active']['house_confidence'] = pos.get('house_confidence')
-            dashboard['active']['is_ducking'] = bool(pos.get('is_ducking'))
 
         summary_path = os.path.join(BASE_DIR, 'summary.json')
         with open(summary_path, 'w') as f:
             json.dump(dashboard, f, indent=2, default=str)
 
-        logger.info("Dashboard JSON exported for %s", ticker)
+        logger.info("Dashboard JSON exported for %s", ', '.join(st['ticker'] for st in WATCHED_STOCKS))
     except Exception as e:
-        logger.error("Dashboard export failed for %s: %s", ticker, e)
+        logger.error("Dashboard export failed: %s", e)
 
 
 def generate_index_page():
@@ -382,19 +410,19 @@ def _run_stock_cycle(ticker, llm_trader):
 
     # 4. Pre-market DD
     if PREMARKET_DD_ENABLED and is_premarket_window():
-        premarket_dd(llm_trader)
+        premarket_dd(llm_trader, ticker=ticker)
 
     # 5. Duck-and-cover phases
     if DUCK_COVER_ENABLED and is_market_open():
         mins = minutes_since_market_open()
         if DUCK_SELL_MINUTES_AFTER_OPEN <= mins <= DUCK_SELL_MINUTES_AFTER_OPEN + 10:
-            duck_and_cover_sell(llm_trader)
+            duck_and_cover_sell(llm_trader, ticker=ticker)
         if DUCK_REBUY_MINUTES_AFTER_OPEN <= mins <= DUCK_REBUY_MINUTES_AFTER_OPEN + 10:
-            duck_and_cover_rebuy(llm_trader)
+            duck_and_cover_rebuy(llm_trader, ticker=ticker)
 
     # 6. Autonomous DD
     if is_market_open():
-        autonomous_dd(llm_trader)
+        autonomous_dd(llm_trader, ticker=ticker)
 
     # 7. Update daily summary
     update_daily_summary(ticker=ticker)
@@ -480,27 +508,31 @@ def run():
             last_track = now
             changed = True
 
-        # Pre-market DD (before NYSE opens)
+        # Pre-market DD (before NYSE opens) - all stocks
         if PREMARKET_DD_ENABLED and is_premarket_window():
             if now - last_dd >= DD_INTERVAL:
-                premarket_dd(llm_trader)
+                for stock in WATCHED_STOCKS:
+                    premarket_dd(llm_trader, ticker=stock['ticker'])
                 last_dd = now
                 changed = True
 
-        # Duck-and-cover phases (market open timing)
+        # Duck-and-cover phases (market open timing) - all stocks
         if DUCK_COVER_ENABLED and is_market_open():
             mins = minutes_since_market_open()
             if DUCK_SELL_MINUTES_AFTER_OPEN <= mins <= DUCK_SELL_MINUTES_AFTER_OPEN + 10:
-                duck_and_cover_sell(llm_trader)
+                for stock in WATCHED_STOCKS:
+                    duck_and_cover_sell(llm_trader, ticker=stock['ticker'])
                 changed = True
             if DUCK_REBUY_MINUTES_AFTER_OPEN <= mins <= DUCK_REBUY_MINUTES_AFTER_OPEN + 10:
-                duck_and_cover_rebuy(llm_trader)
+                for stock in WATCHED_STOCKS:
+                    duck_and_cover_rebuy(llm_trader, ticker=stock['ticker'])
                 changed = True
 
-        # Autonomous DD (during market hours)
+        # Autonomous DD (during market hours) - all stocks
         if now - last_dd >= DD_INTERVAL:
             if is_market_open():
-                autonomous_dd(llm_trader)
+                for stock in WATCHED_STOCKS:
+                    autonomous_dd(llm_trader, ticker=stock['ticker'])
             last_dd = now
 
         # Generate reports (all stocks)

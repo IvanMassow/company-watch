@@ -15,18 +15,20 @@ import json
 # Add a new stock = add an entry here. That's it.
 # ====================================================================
 _stocks_json = os.environ.get("WATCHED_STOCKS", "")
+_rss_url = os.environ.get("RSS_URL", "https://alibaba.makes.news/rss.xml")
 
 if _stocks_json:
     # From env: JSON array of stock dicts
     WATCHED_STOCKS = json.loads(_stocks_json)
 else:
-    # Default: build from individual env vars (backward compatible)
+    # Default: 5-stock China tech portfolio
+    # All share the same Company Watch RSS feed (multi-company report)
     WATCHED_STOCKS = [
-        {
-            "ticker": os.environ.get("WATCHED_TICKER", "BABA"),
-            "company": os.environ.get("WATCHED_COMPANY", "Alibaba"),
-            "rss_url": os.environ.get("RSS_URL", "https://alibaba.makes.news/rss.xml"),
-        },
+        {"ticker": "BABA", "company": "Alibaba", "rss_url": _rss_url},
+        {"ticker": "JD",   "company": "JD.com", "rss_url": _rss_url},
+        {"ticker": "BIDU", "company": "Baidu", "rss_url": _rss_url},
+        {"ticker": "NTES", "company": "NetEase", "rss_url": _rss_url},
+        {"ticker": "PDD",  "company": "PDD Holdings", "rss_url": _rss_url},
     ]
 
 # Convenience shortcuts for backward compatibility (first stock)
@@ -37,7 +39,7 @@ RSS_URL = WATCHED_STOCKS[0]["rss_url"]
 # Alpha Vantage (price data)
 ALPHA_VANTAGE_KEY = os.environ.get("ALPHA_VANTAGE_KEY", "")
 ALPHA_VANTAGE_BASE = "https://www.alphavantage.co/query"
-AV_RATE_LIMIT = 12  # seconds between calls (5/min on free tier)
+AV_RATE_LIMIT = 1  # seconds between calls (paid tier ~75/min)
 
 # OpenAI (LLM due diligence)
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY", "")

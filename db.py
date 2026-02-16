@@ -47,7 +47,7 @@ def init_db():
         CREATE TABLE IF NOT EXISTS reports (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             ticker TEXT NOT NULL,
-            report_url TEXT UNIQUE,
+            report_url TEXT,
             title TEXT,
             published_date TEXT,
             ingested_at TEXT DEFAULT (datetime('now')),

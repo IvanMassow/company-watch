@@ -298,7 +298,7 @@ def process_new_report(report, llm_trader=None):
         conn.close()
 
 
-def premarket_dd(llm_trader=None):
+def premarket_dd(llm_trader=None, ticker=None):
     """
     Pre-market due diligence - runs BEFORE NYSE opens.
     This is almost the first job outside of trading hours.
@@ -311,7 +311,7 @@ def premarket_dd(llm_trader=None):
 
     If it spots a storm coming, it can flag for duck-and-cover at market open.
     """
-    ticker = WATCHED_TICKER
+    ticker = ticker or WATCHED_TICKER
     pos = get_current_position(ticker)
     report = get_latest_report(ticker)
 
@@ -374,7 +374,7 @@ def premarket_dd(llm_trader=None):
         )
 
 
-def duck_and_cover_sell(llm_trader=None):
+def duck_and_cover_sell(llm_trader=None, ticker=None):
     """
     Duck-and-cover SELL phase.
     Called at market open (9:30 ET). If position is flagged for ducking,
@@ -383,7 +383,7 @@ def duck_and_cover_sell(llm_trader=None):
     if not DUCK_COVER_ENABLED:
         return
 
-    ticker = WATCHED_TICKER
+    ticker = ticker or WATCHED_TICKER
     pos = get_current_position(ticker)
     if not pos or pos.get('state') != 'HELD':
         return
@@ -413,7 +413,7 @@ def duck_and_cover_sell(llm_trader=None):
     logger.info("DUCK SELL at $%.2f: %s", price, reason)
 
 
-def duck_and_cover_rebuy(llm_trader=None):
+def duck_and_cover_rebuy(llm_trader=None, ticker=None):
     """
     Duck-and-cover REBUY phase.
     Called ~60 min after open (10:30 ET). Re-enter if the report thesis
@@ -422,7 +422,7 @@ def duck_and_cover_rebuy(llm_trader=None):
     if not DUCK_COVER_ENABLED:
         return
 
-    ticker = WATCHED_TICKER
+    ticker = ticker or WATCHED_TICKER
     report = get_latest_report(ticker)
     if not report:
         return
@@ -475,7 +475,7 @@ def duck_and_cover_rebuy(llm_trader=None):
                      report_stance, house_confidence)
 
 
-def autonomous_dd(llm_trader=None):
+def autonomous_dd(llm_trader=None, ticker=None):
     """
     Autonomous due diligence check - runs between reports.
     This is the "human in the loop" AI that can:
@@ -484,7 +484,7 @@ def autonomous_dd(llm_trader=None):
     3. Apply profit-taking or stop-loss logic
     4. Detect directional mismatches
     """
-    ticker = WATCHED_TICKER
+    ticker = ticker or WATCHED_TICKER
     pos = get_current_position(ticker)
     if not pos or pos.get('state') == 'FLAT':
         return  # Nothing to check when flat
