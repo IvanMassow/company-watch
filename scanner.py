@@ -210,36 +210,99 @@ def parse_ticker_stance_from_table(text, ticker):
     """
     Parse stance and confidence for a specific ticker from the executive dashboard table.
     Table rows look like:
-      | Alibaba Group Holding Limited | BABA | HOLD | 52% | negative | ...
-    Or in plain text after HTML stripping:
+      | Alibaba Group Holding Limited | BABA | HOLD | 60% | positive | ...
+    Or in plain text after HTML stripping (each cell on its own line):
       Alibaba Group Holding Limited
       BABA
       HOLD
-      52%
-    Also matches: '2026-02-16 - Company Name - TICKER - HOLD - 52%'
+      60%
+    Also matches: '2026-02-16 - Company Name - TICKER - HOLD - 60%'
+    Note: section headers may have a report ID instead of confidence
+    (e.g. 'BABA - HOLD - 2694') — we validate 0-100 range.
     """
-    # Try the per-company section header pattern first
-    # "TICKER - HOLD - 52%" or "TICKER - HOLD - 52"
+    stance = None
+    confidence = None
+
+    # --- Strategy 1: Explicit "Confidence: NN%" in body text near the ticker ---
+    # This is the most reliable source, usually in the per-ticker section
+    ticker_section = extract_ticker_section(text, ticker)
+    conf_explicit = re.search(
+        r'\bConfidence\b[:\s]*(\d{1,3})\s*%',
+        ticker_section, re.IGNORECASE
+    )
+    if conf_explicit:
+        val = float(conf_explicit.group(1))
+        if 0 <= val <= 100:
+            confidence = val
+
+    # Also grab the stance from the section ("Action: HOLD" or "HOLD:")
+    stance_in_section = re.search(
+        r'(?:Action|Stance)[:\s]*\*{0,2}(BUY|SELL|HOLD|FADE)\*{0,2}',
+        ticker_section, re.IGNORECASE
+    )
+    if stance_in_section:
+        stance = stance_in_section.group(1).upper()
+
+    # If we got both from the section body, we're done
+    if stance and confidence is not None:
+        return stance, confidence
+
+    # --- Strategy 2: Line-by-line table (HTML table stripped to separate lines) ---
+    # Pattern: line with TICKER, then within next few lines STANCE then NN%
+    lines = text.split('\n')
+    for i, line in enumerate(lines):
+        stripped = line.strip()
+        if stripped.upper() == ticker.upper():
+            # Look ahead in next 4 lines for stance + confidence
+            for j in range(i + 1, min(i + 5, len(lines))):
+                next_line = lines[j].strip().upper()
+                if next_line in ('BUY', 'SELL', 'HOLD', 'FADE'):
+                    if stance is None:
+                        stance = next_line
+                pct_match = re.match(r'^(\d{1,3})\s*%$', lines[j].strip())
+                if pct_match:
+                    val = float(pct_match.group(1))
+                    if 0 <= val <= 100 and confidence is None:
+                        confidence = val
+            if stance and confidence is not None:
+                return stance, confidence
+
+    # --- Strategy 3: Pipe-delimited markdown table row ---
+    # | TICKER | **HOLD** | 60% |
+    table_match = re.search(
+        r'\b' + re.escape(ticker) + r'\b.*?\*{0,2}(BUY|SELL|HOLD|FADE)\*{0,2}\s*\|?\s*(\d{1,3})\s*%',
+        text, re.IGNORECASE
+    )
+    if table_match:
+        val = float(table_match.group(2))
+        if 0 <= val <= 100:
+            if stance is None:
+                stance = table_match.group(1).upper()
+            if confidence is None:
+                confidence = val
+
+    if stance and confidence is not None:
+        return stance, confidence
+
+    # --- Strategy 4: Section header "TICKER - STANCE - NN" with sanity check ---
+    # e.g. "BABA - HOLD - 52" (but NOT "BABA - HOLD - 2694" which is a report ID)
     header_match = re.search(
         r'\b' + re.escape(ticker) + r'\s*[-]\s*(BUY|SELL|HOLD|FADE)\s*[-]\s*(\d+)\s*%?',
         text, re.IGNORECASE
     )
     if header_match:
-        stance = header_match.group(1).upper()
-        confidence = float(header_match.group(2))
+        val = float(header_match.group(2))
+        if 0 <= val <= 100:
+            if stance is None:
+                stance = header_match.group(1).upper()
+            if confidence is None:
+                confidence = val
+
+    if stance and confidence is not None:
         return stance, confidence
 
-    # Try markdown table: | TICKER | **HOLD** | 52% |
-    table_match = re.search(
-        r'\b' + re.escape(ticker) + r'\b.*?\*{0,2}(BUY|SELL|HOLD|FADE)\*{0,2}\s*\|?\s*(\d+)\s*%?',
-        text, re.IGNORECASE
-    )
-    if table_match:
-        stance = table_match.group(1).upper()
-        confidence = float(table_match.group(2))
-        return stance, confidence
-
-    return None, None
+    # Return whatever we got (stance without confidence, or None/None)
+    return stance, confidence
 
 
 def parse_report_sections(text):
