@@ -1,6 +1,6 @@
 {
   "product": "company_watch",
-  "generated_at": "2026-02-16T17:58:23.549883+00:00",
+  "generated_at": "2026-02-16T18:29:21.577524+00:00",
   "stock_count": 5,
   "stocks": [
     {
@@ -8,18 +8,15 @@
       "company": "Alibaba",
       "current_price": 155.73,
       "active": {
-        "state": "HELD",
-        "direction": "LONG",
-        "entry_price": 155.73,
-        "unrealised_pnl": 0.0,
+        "state": "FLAT",
+        "direction": null,
+        "entry_price": null,
+        "unrealised_pnl": 0,
         "realised_pnl": 0,
-        "total_pnl": 0.0,
+        "total_pnl": 0,
         "daily_pnl": 0,
-        "stance": "HOLD",
-        "confidence": 52.0,
-        "report_confidence": 52.0,
-        "house_confidence": 52.0,
-        "is_ducking": false
+        "stance": null,
+        "confidence": null
       },
       "passive": {
         "entry_price": 155.73,
@@ -27,7 +24,7 @@
         "daily_pnl": 0
       },
       "alpha": 0.0,
-      "total_trades": 2,
+      "total_trades": 3,
       "win_rate": 0.0,
       "days_tracked": 1
     },
@@ -44,9 +41,9 @@
         "total_pnl": 0.0,
         "daily_pnl": 0,
         "stance": "HOLD",
-        "confidence": 52.0,
-        "report_confidence": 52.0,
-        "house_confidence": 52.0,
+        "confidence": 60.0,
+        "report_confidence": 2694.0,
+        "house_confidence": 60.0,
         "is_ducking": false
       },
       "passive": {
@@ -64,18 +61,15 @@
       "company": "Baidu",
       "current_price": 137.01,
       "active": {
-        "state": "HELD",
-        "direction": "LONG",
-        "entry_price": 137.01,
-        "unrealised_pnl": 0.0,
+        "state": "FLAT",
+        "direction": null,
+        "entry_price": null,
+        "unrealised_pnl": 0,
         "realised_pnl": 0,
-        "total_pnl": 0.0,
+        "total_pnl": 0,
         "daily_pnl": 0,
-        "stance": "HOLD",
-        "confidence": 52.0,
-        "report_confidence": 52.0,
-        "house_confidence": 52.0,
-        "is_ducking": false
+        "stance": null,
+        "confidence": null
       },
       "passive": {
         "entry_price": 137.01,
@@ -83,7 +77,7 @@
         "daily_pnl": 0
       },
       "alpha": 0.0,
-      "total_trades": 1,
+      "total_trades": 2,
       "win_rate": 0.0,
       "days_tracked": 1
     },
@@ -100,9 +94,9 @@
         "total_pnl": 0.0,
         "daily_pnl": 0,
         "stance": "HOLD",
-        "confidence": 52.0,
-        "report_confidence": 52.0,
-        "house_confidence": 52.0,
+        "confidence": 60.0,
+        "report_confidence": 2694.0,
+        "house_confidence": 60.0,
         "is_ducking": false
       },
       "passive": {
@@ -120,18 +114,15 @@
       "company": "PDD Holdings",
       "current_price": 100.28,
       "active": {
-        "state": "HELD",
-        "direction": "LONG",
-        "entry_price": 100.28,
-        "unrealised_pnl": 0.0,
+        "state": "FLAT",
+        "direction": null,
+        "entry_price": null,
+        "unrealised_pnl": 0,
         "realised_pnl": 0,
-        "total_pnl": 0.0,
+        "total_pnl": 0,
         "daily_pnl": 0,
-        "stance": "HOLD",
-        "confidence": 52.0,
-        "report_confidence": 52.0,
-        "house_confidence": 52.0,
-        "is_ducking": false
+        "stance": null,
+        "confidence": null
       },
       "passive": {
         "entry_price": 100.28,
@@ -139,7 +130,7 @@
         "daily_pnl": 0
       },
       "alpha": 0.0,
-      "total_trades": 1,
+      "total_trades": 2,
       "win_rate": 0.0,
       "days_tracked": 1
     }
@@ -147,18 +138,15 @@
   "ticker": "BABA",
   "current_price": 155.73,
   "active": {
-    "state": "HELD",
-    "direction": "LONG",
-    "entry_price": 155.73,
-    "unrealised_pnl": 0.0,
+    "state": "FLAT",
+    "direction": null,
+    "entry_price": null,
+    "unrealised_pnl": 0,
     "realised_pnl": 0,
-    "total_pnl": 0.0,
+    "total_pnl": 0,
     "daily_pnl": 0,
-    "stance": "HOLD",
-    "confidence": 52.0,
-    "report_confidence": 52.0,
-    "house_confidence": 52.0,
-    "is_ducking": false
+    "stance": null,
+    "confidence": null
   },
   "passive": {
     "entry_price": 155.73,
@@ -166,7 +154,7 @@
     "daily_pnl": 0
   },
   "alpha": 0.0,
-  "total_trades": 2,
+  "total_trades": 3,
   "win_rate": 0.0,
   "days_tracked": 1
 }
