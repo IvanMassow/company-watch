@@ -1,6 +1,6 @@
 {
   "product": "company_watch",
-  "generated_at": "2026-02-16T21:00:05.817262+00:00",
+  "generated_at": "2026-02-16T21:22:41.138272+00:00",
   "stock_count": 5,
   "stocks": [
     {
@@ -15,8 +15,11 @@
         "realised_pnl": 0,
         "total_pnl": 0,
         "daily_pnl": 0,
-        "stance": null,
-        "confidence": null
+        "stance": "FADE",
+        "confidence": 45.0,
+        "report_confidence": 2694.0,
+        "house_confidence": 45.0,
+        "is_ducking": false
       },
       "passive": {
         "entry_price": 155.73,
@@ -68,8 +71,11 @@
         "realised_pnl": 0,
         "total_pnl": 0,
         "daily_pnl": 0,
-        "stance": null,
-        "confidence": null
+        "stance": "FADE",
+        "confidence": 55.0,
+        "report_confidence": 2694.0,
+        "house_confidence": 55.0,
+        "is_ducking": false
       },
       "passive": {
         "entry_price": 137.01,
@@ -121,8 +127,11 @@
         "realised_pnl": 0,
         "total_pnl": 0,
         "daily_pnl": 0,
-        "stance": null,
-        "confidence": null
+        "stance": "HOLD",
+        "confidence": 55.0,
+        "report_confidence": 2694.0,
+        "house_confidence": 55.0,
+        "is_ducking": false
       },
       "passive": {
         "entry_price": 100.28,
@@ -145,8 +154,11 @@
     "realised_pnl": 0,
     "total_pnl": 0,
     "daily_pnl": 0,
-    "stance": null,
-    "confidence": null
+    "stance": "FADE",
+    "confidence": 45.0,
+    "report_confidence": 2694.0,
+    "house_confidence": 45.0,
+    "is_ducking": false
   },
   "passive": {
     "entry_price": 155.73,
