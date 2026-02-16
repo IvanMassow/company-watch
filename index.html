@@ -3,51 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Company Watch: BABA | 2026-02-16 15:38 UTC</title>
+<title>Company Watch | NOAH</title>
 <!-- Open Graph / Social sharing preview -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="NOAH Company Watch - BABA">
+<meta property="og:title" content="NOAH Company Watch">
 <meta property="og:description" content="Single stock intelligence. AI-managed trading vs buy-and-hold benchmark.">
-<meta property="og:image" content="https://ivanmassow.github.io/company-watch/og-image.png?v=2">
+<meta property="og:image" content="https://ivanmassow.github.io/company-watch/og-image.png">
 <meta property="og:url" content="https://ivanmassow.github.io/company-watch/">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="NOAH Company Watch - BABA">
+<meta name="twitter:title" content="NOAH Company Watch">
 <meta name="twitter:description" content="Single stock intelligence. AI-managed trading vs buy-and-hold benchmark.">
-<meta name="twitter:image" content="https://ivanmassow.github.io/company-watch/og-image.png?v=2">
+<meta name="twitter:image" content="https://ivanmassow.github.io/company-watch/og-image.png">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&family=Montserrat:wght@500;700&display=swap');
-
-:root {
-    --ink: #262a33;
-    --ink-light: #3d424d;
-    --ink-subtle: #73788a;
-    --grey-300: #d1d5db;
-    --grey-400: #9ea2b0;
-    --paper: #FFF1E5;
-    --accent: #0d7680;
-    --accent-light: #1a9ba5;
-    --green: #16a34a;
-    --red: #cc0000;
-    --gold: #d97706;
-    --blush: #ffe4d6;
-}
+:root { --ink: #262a33; --grey-400: #9ea2b0; --paper: #FFF1E5; }
 * { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-    font-family: 'Lato', sans-serif;
-    background: var(--paper);
-    color: var(--ink);
-    line-height: 1.6;
-    padding-top: 56px;
-}
-
-.container {
-    max-width: 1120px;
-    margin: 0 auto;
-    padding: 0 2rem;
-}
-
-/* Fixed NOAH header bar */
+body { font-family: 'Lato', sans-serif; background: var(--paper); color: var(--ink); padding-top: 56px; }
 .nav-header {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     background: var(--ink); height: 56px;
@@ -62,387 +33,149 @@ body {
 .nav-header .nav a {
     color: var(--grey-400); text-decoration: none;
     font-size: 0.82rem; letter-spacing: 0.04em;
-    transition: color 0.2s;
 }
 .nav-header .nav a:hover { color: #fff; }
-.nav-header .nav a.active { color: #fff; }
-.nav-header .meta {
-    margin-left: auto; color: var(--grey-400);
-    font-size: 0.78rem; letter-spacing: 0.02em;
-}
-
-/* Hero */
+.nav-header .meta { margin-left: auto; color: var(--grey-400); font-size: 0.78rem; }
 .hero {
     background: var(--ink); color: #fff;
-    padding: 3rem 2rem 2.5rem;
-    margin-top: -56px; padding-top: calc(56px + 2.5rem);
+    padding: 3rem 2rem 2.5rem; margin-top: -56px; padding-top: calc(56px + 2.5rem);
+    text-align: center;
+}
+.hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4.5vw, 3rem); font-weight: 700;
 }
 .hero .subtitle {
     font-size: 0.72rem; font-weight: 700;
     letter-spacing: 0.14em; text-transform: uppercase;
     color: #FFA089; margin-bottom: 0.5rem;
 }
-.hero h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 4.5vw, 3rem); font-weight: 700;
-    letter-spacing: -0.01em; margin-bottom: 0.5rem;
+.container { max-width: 1120px; margin: 0 auto; padding: 0 2rem; }
+.stock-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px; margin: 32px 0;
 }
-.hero .price-hero {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 2.8em;
-    font-weight: 700;
-    margin: 12px 0 6px;
-}
-.hero .price-change {
-    font-size: 1.1em;
-    color: var(--grey-300);
-}
-.hero .hero-meta {
-    font-size: 0.78rem;
-    color: var(--grey-400);
-    margin-top: 12px;
-}
-
-/* Section headers */
-.act-header {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.4em;
-    color: #0d7680;
-    border-bottom: 2px solid #0d7680;
-    padding-bottom: 6px;
-    margin: 32px 0 16px;
-    scroll-margin-top: 72px;
-}
-
-/* Cards */
-.card {
-    background: white;
-    border-radius: 10px;
-    padding: 20px 24px;
-    margin-bottom: 16px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-}
-.card-title {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 700;
-    font-size: 0.85em;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: #73788a;
-    margin-bottom: 12px;
-}
-
-/* Two-line comparison */
-.lines-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin-bottom: 16px;
-}
-.line-card {
-    background: white;
-    border-radius: 10px;
-    padding: 20px 24px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-    border-top: 4px solid;
-}
-.line-active { border-top-color: #0d7680; }
-.line-passive { border-top-color: #d97706; }
-.line-label {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 700;
-    font-size: 0.8em;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 8px;
-}
-.line-active .line-label { color: #0d7680; }
-.line-passive .line-label { color: #d97706; }
-.line-pnl {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 2em;
-    font-weight: 700;
-}
-.line-detail {
-    font-size: 0.85em;
-    color: #73788a;
-    margin-top: 4px;
-}
-
-/* Alpha badge */
-.alpha-card {
-    background: white;
-    border-radius: 10px;
-    padding: 16px 24px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-    text-align: center;
-    margin-bottom: 16px;
-}
-.alpha-value {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 2.4em;
-    font-weight: 700;
-}
-.alpha-label {
-    font-size: 0.85em;
-    color: #73788a;
-    margin-top: 4px;
-}
-
-/* Stance badge */
-.stance-badge {
-    display: inline-block;
-    padding: 4px 14px;
-    border-radius: 20px;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 700;
-    font-size: 0.85em;
-    letter-spacing: 0.03em;
-}
-
-/* Tables */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.85em;
-}
-th {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 700;
-    font-size: 0.75em;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: #73788a;
-    text-align: left;
-    padding: 8px 10px;
-    border-bottom: 2px solid #e8e4e0;
-}
-td {
-    padding: 8px 10px;
-    border-bottom: 1px solid #f0ece8;
-    vertical-align: top;
-}
-tr:hover { background: #fdf8f4; }
-
-/* Report card */
-.report-card {
-    background: white;
-    border-radius: 8px;
-    padding: 14px 18px;
-    margin-bottom: 10px;
-    border-left: 4px solid;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-}
-
-/* Chart area (placeholder for inline sparkline) */
-.chart-area {
-    background: white;
-    border-radius: 10px;
-    padding: 20px;
-    margin-bottom: 16px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-    min-height: 200px;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .lines-grid { grid-template-columns: 1fr; }
-    .hero h1 { font-size: 1.6em; }
-    .hero .price-hero { font-size: 2em; }
-    .nav-header { padding: 0 1rem; }
-    .nav-header .nav { margin-left: 1.5rem; gap: 0.8rem; }
-    .nav-header .meta { display: none; }
-    .container { padding: 0 1rem; }
-}
+.stock-grid a div:hover { transform: translateY(-2px); }
 </style>
 </head>
 <body>
-
-<!-- NOAH Header Bar -->
 <div class="nav-header">
     <a href="https://ivanmassow.github.io/noah-dashboard/" class="logo">NOAH</a>
     <div class="nav">
         <a href="https://ivanmassow.github.io/polyhunter/">Poly Market</a>
         <a href="https://ivanmassow.github.io/hedgefund-tracker/">Hedge Fund</a>
-        <a href="https://ivanmassow.github.io/company-watch/" style="color:#fff">Company Watch</a>
-        <span style="color:rgba(255,255,255,0.15)">|</span>
-        <a href="#arena">Arena</a>
-        <a href="#ledger">Ledger</a>
-        <a href="#scoreboard">Scoreboard</a>
+        <a href="https://ivanmassow.github.io/company-watch/">Company Watch</a>
     </div>
-    <div class="meta">Company Watch &middot; BABA &middot; 2026-02-16 15:38 UTC</div>
+    <div class="meta">Company Watch &middot; 5 Stocks</div>
 </div>
 
 <div class="hero">
     <div class="container">
-        
         <div class="subtitle">Company Watch &middot; Stock Intelligence</div>
-        <h1>BABA</h1>
-        <div class="price-hero">$155.73</div>
-        <div class="price-change" style="color:#cc0000">&#9660; -1.89% today</div>
-        <div class="hero-meta">2026-02-16 15:38 UTC</div>
+        <h1>Select a Stock</h1>
+        <div style="font-size:0.85rem;color:#d1d5db;margin-top:8px">2026-02-16 15:38 UTC</div>
     </div>
 </div>
 
 <div class="container">
-<h2 class="act-header" id="arena">Act I: The Arena</h2>
-<div class="card">
-    <div class="card-title">Current Stance</div>
-    <div style="margin-bottom:12px">
-        <span class="stance-badge" style="background:#f1f5f9;color:#9ea2b0">FADE</span>
+    <div class="stock-grid">
         
-    </div>
-    <div style="display:flex;gap:24px;flex-wrap:wrap">
-        <div style="text-align:center;min-width:100px">
-            <div style="font-family:Montserrat,sans-serif;font-size:1.6em;font-weight:700;color:#0d7680">0%</div>
-            <div style="font-size:0.75em;color:#73788a;text-transform:uppercase;letter-spacing:0.05em">Report</div>
+        <a href="reports/BABA/latest.html" style="text-decoration:none;color:inherit">
+        <div style="background:white;border-radius:10px;padding:24px;box-shadow:0 1px 4px rgba(0,0,0,0.06);border-top:4px solid #0d7680;transition:transform 0.15s">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+                <div>
+                    <div style="font-family:Montserrat,sans-serif;font-weight:700;font-size:1.4em;color:#0d7680">BABA</div>
+                    <div style="font-size:0.8em;color:#73788a">Alibaba</div>
+                </div>
+                <span style="background:#f1f5f9;color:#9ea2b0;padding:4px 14px;border-radius:20px;font-family:Montserrat,sans-serif;font-weight:700;font-size:0.85em">FLAT</span>
+            </div>
+            <div style="font-family:Montserrat,sans-serif;font-size:2em;font-weight:700;margin-bottom:8px">$155.73</div>
+            <div style="display:flex;gap:20px;font-size:0.85em">
+                <div><span style="color:#73788a">Report:</span> <strong>0%</strong></div>
+                <div><span style="color:#73788a">House:</span> <strong>0%</strong></div>
+                <div><span style="color:#73788a">Alpha:</span> <strong style="color:#9ea2b0">+0.00%</strong></div>
+            </div>
         </div>
-        <div style="text-align:center;min-width:100px">
-            <div style="font-family:Montserrat,sans-serif;font-size:1.6em;font-weight:700;color:#262a33">0%</div>
-            <div style="font-size:0.75em;color:#73788a;text-transform:uppercase;letter-spacing:0.05em">House</div>
+        </a>
+        <a href="reports/JD/latest.html" style="text-decoration:none;color:inherit">
+        <div style="background:white;border-radius:10px;padding:24px;box-shadow:0 1px 4px rgba(0,0,0,0.06);border-top:4px solid #0d7680;transition:transform 0.15s">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+                <div>
+                    <div style="font-family:Montserrat,sans-serif;font-weight:700;font-size:1.4em;color:#0d7680">JD</div>
+                    <div style="font-size:0.8em;color:#73788a">JD.com</div>
+                </div>
+                <span style="background:#fef3c7;color:#d97706;padding:4px 14px;border-radius:20px;font-family:Montserrat,sans-serif;font-weight:700;font-size:0.85em">HOLD</span>
+            </div>
+            <div style="font-family:Montserrat,sans-serif;font-size:2em;font-weight:700;margin-bottom:8px">$27.14</div>
+            <div style="display:flex;gap:20px;font-size:0.85em">
+                <div><span style="color:#73788a">Report:</span> <strong>52%</strong></div>
+                <div><span style="color:#73788a">House:</span> <strong>52%</strong></div>
+                <div><span style="color:#73788a">Alpha:</span> <strong style="color:#9ea2b0">+0.00%</strong></div>
+            </div>
         </div>
-        <div style="text-align:center;min-width:120px;padding-top:4px">
-            <div style="font-size:0.9em;color:#73788a">&#9644; House agrees</div>
-            <div style="font-size:0.75em;color:#73788a;margin-top:2px">Effective: 0%</div>
+        </a>
+        <a href="reports/BIDU/latest.html" style="text-decoration:none;color:inherit">
+        <div style="background:white;border-radius:10px;padding:24px;box-shadow:0 1px 4px rgba(0,0,0,0.06);border-top:4px solid #0d7680;transition:transform 0.15s">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+                <div>
+                    <div style="font-family:Montserrat,sans-serif;font-weight:700;font-size:1.4em;color:#0d7680">BIDU</div>
+                    <div style="font-size:0.8em;color:#73788a">Baidu</div>
+                </div>
+                <span style="background:#f1f5f9;color:#9ea2b0;padding:4px 14px;border-radius:20px;font-family:Montserrat,sans-serif;font-weight:700;font-size:0.85em">FLAT</span>
+            </div>
+            <div style="font-family:Montserrat,sans-serif;font-size:2em;font-weight:700;margin-bottom:8px">$137.01</div>
+            <div style="display:flex;gap:20px;font-size:0.85em">
+                <div><span style="color:#73788a">Report:</span> <strong>0%</strong></div>
+                <div><span style="color:#73788a">House:</span> <strong>0%</strong></div>
+                <div><span style="color:#73788a">Alpha:</span> <strong style="color:#9ea2b0">+0.00%</strong></div>
+            </div>
         </div>
+        </a>
+        <a href="reports/NTES/latest.html" style="text-decoration:none;color:inherit">
+        <div style="background:white;border-radius:10px;padding:24px;box-shadow:0 1px 4px rgba(0,0,0,0.06);border-top:4px solid #0d7680;transition:transform 0.15s">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+                <div>
+                    <div style="font-family:Montserrat,sans-serif;font-weight:700;font-size:1.4em;color:#0d7680">NTES</div>
+                    <div style="font-size:0.8em;color:#73788a">NetEase</div>
+                </div>
+                <span style="background:#fef3c7;color:#d97706;padding:4px 14px;border-radius:20px;font-family:Montserrat,sans-serif;font-weight:700;font-size:0.85em">HOLD</span>
+            </div>
+            <div style="font-family:Montserrat,sans-serif;font-size:2em;font-weight:700;margin-bottom:8px">$120.61</div>
+            <div style="display:flex;gap:20px;font-size:0.85em">
+                <div><span style="color:#73788a">Report:</span> <strong>52%</strong></div>
+                <div><span style="color:#73788a">House:</span> <strong>52%</strong></div>
+                <div><span style="color:#73788a">Alpha:</span> <strong style="color:#9ea2b0">+0.00%</strong></div>
+            </div>
+        </div>
+        </a>
+        <a href="reports/PDD/latest.html" style="text-decoration:none;color:inherit">
+        <div style="background:white;border-radius:10px;padding:24px;box-shadow:0 1px 4px rgba(0,0,0,0.06);border-top:4px solid #0d7680;transition:transform 0.15s">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+                <div>
+                    <div style="font-family:Montserrat,sans-serif;font-weight:700;font-size:1.4em;color:#0d7680">PDD</div>
+                    <div style="font-size:0.8em;color:#73788a">PDD Holdings</div>
+                </div>
+                <span style="background:#f1f5f9;color:#9ea2b0;padding:4px 14px;border-radius:20px;font-family:Montserrat,sans-serif;font-weight:700;font-size:0.85em">FLAT</span>
+            </div>
+            <div style="font-family:Montserrat,sans-serif;font-size:2em;font-weight:700;margin-bottom:8px">$100.28</div>
+            <div style="display:flex;gap:20px;font-size:0.85em">
+                <div><span style="color:#73788a">Report:</span> <strong>0%</strong></div>
+                <div><span style="color:#73788a">House:</span> <strong>0%</strong></div>
+                <div><span style="color:#73788a">Alpha:</span> <strong style="color:#9ea2b0">+0.00%</strong></div>
+            </div>
+        </div>
+        </a>
     </div>
 </div>
-
-<div class="lines-grid">
-    <div class="line-card line-active">
-        <div class="line-label">Active Line (AI-Managed)</div>
-        <div class="line-pnl" style="color:#9ea2b0">&#9644; +0.00%</div>
-        <div class="line-detail">
-            State: FLAT <br>
-            Entry: FLAT<br>
-            Realised: +0.00% | Total: +0.00%
-        </div>
-    </div>
-    <div class="line-card line-passive">
-        <div class="line-label">Passive Line (Buy &amp; Hold)</div>
-        <div class="line-pnl" style="color:#9ea2b0">&#9644; +0.00%</div>
-        <div class="line-detail">
-            Entry: $155.73<br>
-            Strategy: Hold forever, take the hits and the good times
-        </div>
-    </div>
-</div>
-
-<div class="alpha-card">
-    <div class="alpha-value" style="color:#9ea2b0">+0.00%</div>
-    <div class="alpha-label">Alpha (Active - Passive) &middot; Tied</div>
-</div>
-<div class="chart-area" style="text-align:center;padding-top:80px;color:#9ea2b0">Awaiting price data for chart</div>
-<div class="report-card" style="border-left-color:#d97706">
-    <div class="card-title">Latest Report (2026-02-16T13:27)</div>
-    <span class="stance-badge" style="background:#fef3c7;color:#d97706">HOLD</span>
-    <span style="margin-left:8px;font-size:0.85em">Report Confidence: 52%</span>
-    <span style="margin-left:8px;font-size:0.85em;color:#0d7680">|</span>
-    <span style="margin-left:8px;font-size:0.85em">House: 0%</span>
-    <p style="margin-top:8px;font-size:0.9em;color:#555">Single indirect CAC compliance signal is EARLY with no quantified revenue exposure and confidence remains below the action threshold.</p>
-</div>
-<h2 class="act-header" id="ledger">Act II: The Ledger</h2><div class="card"><div class="card-title">Recent Decisions</div><table><tr><th>Time</th><th>Type</th><th>From</th><th>To</th><th>Report</th><th>House</th><th>Trigger</th><th>Reason</th></tr><tr>
-            <td>2026-02-16T13:43</td>
-            <td>ENTRY</td>
-            <td><span style="color:#9ea2b0">None</span></td>
-            <td><span style="color:#9ea2b0">None</span></td>
-            <td></td>
-            <td></td>
-            <td>manual</td>
-            <td style="font-size:0.8em">Clean slate - 5 stock China tech portfolio</td>
-        </tr><tr>
-            <td>2026-02-16 14:30</td>
-            <td>EXIT</td>
-            <td><span style="color:#d97706">HOLD</span></td>
-            <td><span style="color:#9ea2b0">FADE</span></td>
-            <td></td>
-            <td></td>
-            <td>autonomous</td>
-            <td style="font-size:0.8em">DUCK-AND-COVER SELL: The news wire is overwhelmingly bearish, with 7 out of 10 articles indicating negative sentiment du</td>
-        </tr><tr>
-            <td>2026-02-16 14:06</td>
-            <td>PREMARKET_DUCK</td>
-            <td><span style="color:#d97706">HOLD</span></td>
-            <td><span style="color:#9ea2b0">DUCK</span></td>
-            <td></td>
-            <td></td>
-            <td>premarket</td>
-            <td style="font-size:0.8em">Pre-market: flagged for duck-and-cover. The news wire is overwhelmingly bearish, with 7 out of 10 articles indicating ne</td>
-        </tr><tr>
-            <td>2026-02-16 14:05</td>
-            <td>PREMARKET_DUCK</td>
-            <td><span style="color:#d97706">HOLD</span></td>
-            <td><span style="color:#9ea2b0">DUCK</span></td>
-            <td></td>
-            <td></td>
-            <td>premarket</td>
-            <td style="font-size:0.8em">Pre-market: flagged for duck-and-cover. The news wire is overwhelmingly bearish, with 7 out of 10 articles reflecting ne</td>
-        </tr></table></div><div class="card"><div class="card-title">Trade History</div><table><tr><th>Direction</th><th>Entry</th><th>Exit</th><th>P&L</th><th>Reason</th><th>Duration</th></tr><tr>
-                <td>LONG</td>
-                <td>$155.73<br><small>2026-02-16</small></td>
-                <td>$155.73<br><small>2026-02-16</small></td>
-                <td style="color:#9ea2b0;font-weight:700">+0.00%</td>
-                <td style="font-size:0.8em">DUCK-AND-COVER SELL: The news wire is overwhelmingly bearish, with 7 out of 10 articles indicating n</td>
-                <td>1h</td>
-            </tr></table></div><h2 class="act-header" id="scoreboard">Act III: The Scoreboard</h2>
-<div class="lines-grid">
-    <div class="card">
-        <div class="card-title">Trading Performance</div>
-        <table>
-            <tr><td>Total Trades</td><td style="text-align:right;font-weight:700">1</td></tr>
-            <tr><td>Win Rate</td><td style="text-align:right;font-weight:700">0.0%</td></tr>
-            <tr><td>Avg Win</td><td style="text-align:right;color:#16a34a">+0.00%</td></tr>
-            <tr><td>Avg Loss</td><td style="text-align:right;color:#cc0000">+0.00%</td></tr>
-            <tr><td>Best Trade</td><td style="text-align:right;color:#16a34a">+0.00%</td></tr>
-            <tr><td>Worst Trade</td><td style="text-align:right;color:#cc0000">+0.00%</td></tr>
-            <tr><td>Avg Hold</td><td style="text-align:right">1h</td></tr>
-        </table>
-    </div>
-    <div class="card">
-        <div class="card-title">Decision Analysis</div>
-        <table>
-            <tr><td>Total Decisions</td><td style="text-align:right;font-weight:700">4</td></tr>
-            <tr><td>Entries</td><td style="text-align:right">1</td></tr>
-            <tr><td>Exits</td><td style="text-align:right">1</td></tr>
-            <tr><td>Stance Updates</td><td style="text-align:right">0</td></tr>
-            <tr><td>Report-Triggered</td><td style="text-align:right">0</td></tr>
-            <tr><td>Autonomous</td><td style="text-align:right">1</td></tr>
-            <tr><td>Overrides &#9889;</td><td style="text-align:right;font-weight:700">0 (0%)</td></tr>
-        </table>
-    </div>
-</div>
-<div class="card"><div class="card-title">Daily Comparison</div><table><tr><th>Date</th><th>Close</th><th>Active</th><th>Passive</th><th>Alpha</th><th>Stance</th><th>Report</th></tr><tr>
-                <td>2026-02-16</td>
-                <td>$155.73</td>
-                <td style="color:#9ea2b0">+0.00%</td>
-                <td style="color:#9ea2b0">+0.00%</td>
-                <td style="color:#9ea2b0;font-weight:700">+0.00%</td>
-                <td><span style="color:#9ea2b0">HELD</span></td>
-                <td>&#128196;</td>
-            </tr></table></div>
-</div><!-- end container -->
 
 <footer style="background:var(--ink);padding:2rem;text-align:center;margin-top:3rem">
-    <a href="https://ivanmassow.github.io/noah-dashboard/" style="text-decoration:none"><div style="font-family:Montserrat,sans-serif;font-weight:700;color:#fff;font-size:1rem;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px">NOAH</div></a>
-    <p style="font-size:0.82rem;color:rgba(255,241,229,0.5);margin-bottom:8px">
-        Company Watch &mdash; single stock intelligence tracking BABA.
-        Active line: AI-managed trading | Passive line: Buy &amp; hold benchmark.
-    </p>
-    <p style="font-size:0.72rem;color:rgba(255,241,229,0.35);margin-bottom:8px">
+    <div style="font-family:Montserrat,sans-serif;font-weight:700;color:#fff;font-size:1rem;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px">NOAH</div>
+    <p style="font-size:0.72rem;color:rgba(255,241,229,0.35)">
+        Company Watch &mdash; stock intelligence system.
         <a href="https://ivanmassow.github.io/polyhunter/" style="color:rgba(255,241,229,0.5);text-decoration:none">Poly Market</a> &middot;
         <a href="https://ivanmassow.github.io/hedgefund-tracker/" style="color:rgba(255,241,229,0.5);text-decoration:none">Hedge Fund</a> &middot;
         <a href="https://ivanmassow.github.io/company-watch/" style="color:rgba(255,241,229,0.5);text-decoration:none">Company Watch</a>
     </p>
-    <p style="font-size:0.72rem;color:rgba(255,241,229,0.25)">
-        Report generated 2026-02-16 15:38 UTC.
-    </p>
-    <div style="margin-top:1.2rem;max-width:560px;margin-left:auto;margin-right:auto;padding:0.8rem 1rem;border-top:1px solid rgba(255,241,229,0.12)">
-        <p style="font-size:0.7rem;color:rgba(255,241,229,0.55);line-height:1.7;text-align:center;margin:0">
-            <strong style="color:rgba(255,241,229,0.7);letter-spacing:0.08em;text-transform:uppercase;font-size:0.65rem">Disclaimer</strong><br>
-            You are welcome to view these pages. The trading algorithms and analysis presented here are experimental and under active development. Nothing on this site constitutes financial advice. We accept no responsibility for any losses incurred from acting on information found here. These pages are intended for internal research purposes. You are strongly advised to conduct your own due diligence before making any investment decisions.
-        </p>
-    </div>
 </footer>
-
 </body>
 </html>
