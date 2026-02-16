@@ -1,7 +1,141 @@
 {
   "product": "company_watch",
+  "generated_at": "2026-02-16T15:39:51.913031+00:00",
+  "stock_count": 5,
+  "stocks": [
+    {
+      "ticker": "BABA",
+      "company": "Alibaba",
+      "current_price": 155.73,
+      "active": {
+        "state": "FLAT",
+        "direction": null,
+        "entry_price": null,
+        "unrealised_pnl": 0,
+        "realised_pnl": 0,
+        "total_pnl": 0,
+        "daily_pnl": 0,
+        "stance": null,
+        "confidence": null
+      },
+      "passive": {
+        "entry_price": 155.73,
+        "pnl": 0.0,
+        "daily_pnl": 0
+      },
+      "alpha": 0.0,
+      "total_trades": 1,
+      "win_rate": 0.0,
+      "days_tracked": 1
+    },
+    {
+      "ticker": "JD",
+      "company": "JD.com",
+      "current_price": 27.14,
+      "active": {
+        "state": "HELD",
+        "direction": "LONG",
+        "entry_price": 27.14,
+        "unrealised_pnl": 0.0,
+        "realised_pnl": 0,
+        "total_pnl": 0.0,
+        "daily_pnl": 0,
+        "stance": "HOLD",
+        "confidence": 52.0,
+        "report_confidence": 52.0,
+        "house_confidence": 52.0,
+        "is_ducking": false
+      },
+      "passive": {
+        "entry_price": 27.14,
+        "pnl": 0.0,
+        "daily_pnl": 0
+      },
+      "alpha": 0.0,
+      "total_trades": 0,
+      "win_rate": 0,
+      "days_tracked": 1
+    },
+    {
+      "ticker": "BIDU",
+      "company": "Baidu",
+      "current_price": 137.01,
+      "active": {
+        "state": "FLAT",
+        "direction": null,
+        "entry_price": null,
+        "unrealised_pnl": 0,
+        "realised_pnl": 0,
+        "total_pnl": 0,
+        "daily_pnl": 0,
+        "stance": null,
+        "confidence": null
+      },
+      "passive": {
+        "entry_price": 137.01,
+        "pnl": 0.0,
+        "daily_pnl": 0
+      },
+      "alpha": 0.0,
+      "total_trades": 1,
+      "win_rate": 0.0,
+      "days_tracked": 1
+    },
+    {
+      "ticker": "NTES",
+      "company": "NetEase",
+      "current_price": 120.61,
+      "active": {
+        "state": "HELD",
+        "direction": "LONG",
+        "entry_price": 120.61,
+        "unrealised_pnl": 0.0,
+        "realised_pnl": 0,
+        "total_pnl": 0.0,
+        "daily_pnl": 0,
+        "stance": "HOLD",
+        "confidence": 52.0,
+        "report_confidence": 52.0,
+        "house_confidence": 52.0,
+        "is_ducking": false
+      },
+      "passive": {
+        "entry_price": 120.61,
+        "pnl": 0.0,
+        "daily_pnl": 0
+      },
+      "alpha": 0.0,
+      "total_trades": 0,
+      "win_rate": 0,
+      "days_tracked": 1
+    },
+    {
+      "ticker": "PDD",
+      "company": "PDD Holdings",
+      "current_price": 100.28,
+      "active": {
+        "state": "FLAT",
+        "direction": null,
+        "entry_price": null,
+        "unrealised_pnl": 0,
+        "realised_pnl": 0,
+        "total_pnl": 0,
+        "daily_pnl": 0,
+        "stance": null,
+        "confidence": null
+      },
+      "passive": {
+        "entry_price": 100.28,
+        "pnl": 0.0,
+        "daily_pnl": 0
+      },
+      "alpha": 0.0,
+      "total_trades": 1,
+      "win_rate": 0.0,
+      "days_tracked": 1
+    }
+  ],
   "ticker": "BABA",
-  "generated_at": "2026-02-16T15:39:35.939814+00:00",
   "current_price": 155.73,
   "active": {
     "state": "FLAT",
