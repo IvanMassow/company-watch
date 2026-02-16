@@ -1,6 +1,6 @@
 {
   "product": "company_watch",
-  "generated_at": "2026-02-16T16:58:00.880733+00:00",
+  "generated_at": "2026-02-16T17:00:21.292638+00:00",
   "stock_count": 5,
   "stocks": [
     {
@@ -8,15 +8,18 @@
       "company": "Alibaba",
       "current_price": 155.73,
       "active": {
-        "state": "FLAT",
-        "direction": null,
-        "entry_price": null,
-        "unrealised_pnl": 0,
+        "state": "HELD",
+        "direction": "LONG",
+        "entry_price": 155.73,
+        "unrealised_pnl": 0.0,
         "realised_pnl": 0,
-        "total_pnl": 0,
+        "total_pnl": 0.0,
         "daily_pnl": 0,
-        "stance": null,
-        "confidence": null
+        "stance": "HOLD",
+        "confidence": 52.0,
+        "report_confidence": 52.0,
+        "house_confidence": 52.0,
+        "is_ducking": false
       },
       "passive": {
         "entry_price": 155.73,
@@ -144,15 +147,18 @@
   "ticker": "BABA",
   "current_price": 155.73,
   "active": {
-    "state": "FLAT",
-    "direction": null,
-    "entry_price": null,
-    "unrealised_pnl": 0,
+    "state": "HELD",
+    "direction": "LONG",
+    "entry_price": 155.73,
+    "unrealised_pnl": 0.0,
     "realised_pnl": 0,
-    "total_pnl": 0,
+    "total_pnl": 0.0,
     "daily_pnl": 0,
-    "stance": null,
-    "confidence": null
+    "stance": "HOLD",
+    "confidence": 52.0,
+    "report_confidence": 52.0,
+    "house_confidence": 52.0,
+    "is_ducking": false
   },
   "passive": {
     "entry_price": 155.73,
