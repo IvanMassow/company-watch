@@ -1,6 +1,6 @@
 {
   "product": "company_watch",
-  "generated_at": "2026-02-17T00:26:05.060238+00:00",
+  "generated_at": "2026-02-17T01:26:32.259436+00:00",
   "stock_count": 5,
   "stocks": [
     {
@@ -29,7 +29,7 @@
       "alpha": 0.0,
       "total_trades": 3,
       "win_rate": 0.0,
-      "days_tracked": 1
+      "days_tracked": 2
     },
     {
       "ticker": "JD",
@@ -57,7 +57,7 @@
       "alpha": 0.0,
       "total_trades": 0,
       "win_rate": 0,
-      "days_tracked": 1
+      "days_tracked": 2
     },
     {
       "ticker": "BIDU",
@@ -85,7 +85,7 @@
       "alpha": 0.0,
       "total_trades": 2,
       "win_rate": 0.0,
-      "days_tracked": 1
+      "days_tracked": 2
     },
     {
       "ticker": "NTES",
@@ -113,7 +113,7 @@
       "alpha": 0.0,
       "total_trades": 0,
       "win_rate": 0,
-      "days_tracked": 1
+      "days_tracked": 2
     },
     {
       "ticker": "PDD",
@@ -141,7 +141,7 @@
       "alpha": 0.0,
       "total_trades": 2,
       "win_rate": 0.0,
-      "days_tracked": 1
+      "days_tracked": 2
     }
   ],
   "ticker": "BABA",
@@ -168,5 +168,5 @@
   "alpha": 0.0,
   "total_trades": 3,
   "win_rate": 0.0,
-  "days_tracked": 1
+  "days_tracked": 2
 }
