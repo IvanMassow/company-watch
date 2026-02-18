@@ -1,6 +1,6 @@
 {
   "product": "company_watch",
-  "generated_at": "2026-02-18T15:28:01.505561+00:00",
+  "generated_at": "2026-02-18T15:30:13.319292+00:00",
   "stock_count": 5,
   "stocks": [
     {
@@ -8,17 +8,17 @@
       "company": "Alibaba",
       "current_price": 155.43,
       "active": {
-        "state": "FLAT",
-        "direction": null,
-        "entry_price": null,
-        "unrealised_pnl": 0,
+        "state": "HELD",
+        "direction": "LONG",
+        "entry_price": 155.43,
+        "unrealised_pnl": 0.0,
         "realised_pnl": 0,
-        "total_pnl": 0,
+        "total_pnl": 0.0,
         "daily_pnl": 0,
-        "stance": "HOLD",
-        "confidence": 60.0,
+        "stance": "BUY",
+        "confidence": 70.0,
         "report_confidence": 70.0,
-        "house_confidence": 60.0,
+        "house_confidence": 70.0,
         "is_ducking": false
       },
       "passive": {
@@ -36,17 +36,17 @@
       "company": "JD.com",
       "current_price": 27.14,
       "active": {
-        "state": "FLAT",
-        "direction": null,
-        "entry_price": null,
-        "unrealised_pnl": 0,
+        "state": "HELD",
+        "direction": "LONG",
+        "entry_price": 27.33,
+        "unrealised_pnl": -0.6952067325283489,
         "realised_pnl": 0,
-        "total_pnl": 0,
+        "total_pnl": -0.6952067325283489,
         "daily_pnl": 0,
-        "stance": "HOLD",
-        "confidence": 65.0,
+        "stance": "BUY",
+        "confidence": 70.0,
         "report_confidence": 70.0,
-        "house_confidence": 65.0,
+        "house_confidence": 70.0,
         "is_ducking": false
       },
       "passive": {
@@ -54,7 +54,7 @@
         "pnl": 0.0,
         "daily_pnl": 0
       },
-      "alpha": 0.0,
+      "alpha": -0.6952067325283489,
       "total_trades": 0,
       "win_rate": 0,
       "days_tracked": 2
@@ -147,17 +147,17 @@
   "ticker": "BABA",
   "current_price": 155.43,
   "active": {
-    "state": "FLAT",
-    "direction": null,
-    "entry_price": null,
-    "unrealised_pnl": 0,
+    "state": "HELD",
+    "direction": "LONG",
+    "entry_price": 155.43,
+    "unrealised_pnl": 0.0,
     "realised_pnl": 0,
-    "total_pnl": 0,
+    "total_pnl": 0.0,
     "daily_pnl": 0,
-    "stance": "HOLD",
-    "confidence": 60.0,
+    "stance": "BUY",
+    "confidence": 70.0,
     "report_confidence": 70.0,
-    "house_confidence": 60.0,
+    "house_confidence": 70.0,
     "is_ducking": false
   },
   "passive": {
