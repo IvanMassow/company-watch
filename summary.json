@@ -1,6 +1,6 @@
 {
   "product": "company_watch",
-  "generated_at": "2026-02-18T15:38:26.490946+00:00",
+  "generated_at": "2026-02-18T15:39:11.085878+00:00",
   "stock_count": 5,
   "stocks": [
     {
@@ -27,7 +27,7 @@
         "daily_pnl": -0.19264110961278044
       },
       "alpha": 0.19264110961278044,
-      "total_trades": 10,
+      "total_trades": 12,
       "win_rate": 0.0,
       "days_tracked": 2
     },
@@ -55,7 +55,7 @@
         "daily_pnl": 0
       },
       "alpha": -0.6952067325283489,
-      "total_trades": 10,
+      "total_trades": 12,
       "win_rate": 0.0,
       "days_tracked": 2
     },
@@ -111,7 +111,7 @@
         "daily_pnl": 0
       },
       "alpha": 0.9288702928870287,
-      "total_trades": 10,
+      "total_trades": 11,
       "win_rate": 0.0,
       "days_tracked": 2
     },
@@ -166,7 +166,7 @@
     "daily_pnl": -0.19264110961278044
   },
   "alpha": 0.19264110961278044,
-  "total_trades": 10,
+  "total_trades": 12,
   "win_rate": 0.0,
   "days_tracked": 2
 }
