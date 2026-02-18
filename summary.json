@@ -1,12 +1,12 @@
 {
   "product": "company_watch",
-  "generated_at": "2026-02-18T02:49:41.031949+00:00",
+  "generated_at": "2026-02-18T02:59:47.987115+00:00",
   "stock_count": 5,
   "stocks": [
     {
       "ticker": "BABA",
       "company": "Alibaba",
-      "current_price": 155.475,
+      "current_price": 155.43,
       "active": {
         "state": "FLAT",
         "direction": null,
@@ -23,13 +23,13 @@
       },
       "passive": {
         "entry_price": 155.73,
-        "pnl": -0.16374494317086974,
-        "daily_pnl": -0.16374494317086974
+        "pnl": -0.19264110961278044,
+        "daily_pnl": -0.19264110961278044
       },
-      "alpha": 0.16374494317086974,
+      "alpha": 0.19264110961278044,
       "total_trades": 0,
       "win_rate": 0,
-      "days_tracked": 1
+      "days_tracked": 2
     },
     {
       "ticker": "JD",
@@ -90,7 +90,7 @@
     {
       "ticker": "NTES",
       "company": "NetEase",
-      "current_price": 119.5,
+      "current_price": 120.61,
       "active": {
         "state": "FLAT",
         "direction": null,
@@ -107,13 +107,13 @@
       },
       "passive": {
         "entry_price": 120.61,
-        "pnl": -0.9203216980349883,
-        "daily_pnl": -0.9203216980349883
+        "pnl": 0.0,
+        "daily_pnl": 0
       },
-      "alpha": 0.9203216980349883,
+      "alpha": 0.0,
       "total_trades": 0,
       "win_rate": 0,
-      "days_tracked": 1
+      "days_tracked": 2
     },
     {
       "ticker": "PDD",
@@ -141,11 +141,11 @@
       "alpha": -1.5456721180694029,
       "total_trades": 0,
       "win_rate": 0,
-      "days_tracked": 1
+      "days_tracked": 2
     }
   ],
   "ticker": "BABA",
-  "current_price": 155.475,
+  "current_price": 155.43,
   "active": {
     "state": "FLAT",
     "direction": null,
@@ -162,11 +162,11 @@
   },
   "passive": {
     "entry_price": 155.73,
-    "pnl": -0.16374494317086974,
-    "daily_pnl": -0.16374494317086974
+    "pnl": -0.19264110961278044,
+    "daily_pnl": -0.19264110961278044
   },
-  "alpha": 0.16374494317086974,
+  "alpha": 0.19264110961278044,
   "total_trades": 0,
   "win_rate": 0,
-  "days_tracked": 1
+  "days_tracked": 2
 }
