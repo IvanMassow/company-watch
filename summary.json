@@ -1,6 +1,6 @@
 {
   "product": "company_watch",
-  "generated_at": "2026-02-18T15:30:14.864320+00:00",
+  "generated_at": "2026-02-18T15:30:25.630139+00:00",
   "stock_count": 5,
   "stocks": [
     {
@@ -92,17 +92,17 @@
       "company": "NetEase",
       "current_price": 120.61,
       "active": {
-        "state": "FLAT",
-        "direction": null,
-        "entry_price": null,
-        "unrealised_pnl": 0,
+        "state": "HELD",
+        "direction": "LONG",
+        "entry_price": 119.5,
+        "unrealised_pnl": 0.9288702928870287,
         "realised_pnl": 0,
-        "total_pnl": 0,
+        "total_pnl": 0.9288702928870287,
         "daily_pnl": 0,
-        "stance": "HOLD",
-        "confidence": 65.0,
+        "stance": "BUY",
+        "confidence": 70.0,
         "report_confidence": 70.0,
-        "house_confidence": 65.0,
+        "house_confidence": 70.0,
         "is_ducking": false
       },
       "passive": {
@@ -110,7 +110,7 @@
         "pnl": 0.0,
         "daily_pnl": 0
       },
-      "alpha": 0.0,
+      "alpha": 0.9288702928870287,
       "total_trades": 0,
       "win_rate": 0,
       "days_tracked": 2

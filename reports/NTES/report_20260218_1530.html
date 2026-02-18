@@ -298,7 +298,7 @@ tr:hover { background: #fdf8f4; }
 <div class="card">
     <div class="card-title">Current Stance</div>
     <div style="margin-bottom:12px">
-        <span class="stance-badge" style="background:#fef3c7;color:#d97706">HOLD</span>
+        <span class="stance-badge" style="background:#dcfce7;color:#16a34a">BUY</span>
         
     </div>
     <div style="display:flex;gap:24px;flex-wrap:wrap">
@@ -307,12 +307,12 @@ tr:hover { background: #fdf8f4; }
             <div style="font-size:0.75em;color:#73788a;text-transform:uppercase;letter-spacing:0.05em">Report</div>
         </div>
         <div style="text-align:center;min-width:100px">
-            <div style="font-family:Montserrat,sans-serif;font-size:1.6em;font-weight:700;color:#262a33">65%</div>
+            <div style="font-family:Montserrat,sans-serif;font-size:1.6em;font-weight:700;color:#262a33">70%</div>
             <div style="font-size:0.75em;color:#73788a;text-transform:uppercase;letter-spacing:0.05em">House</div>
         </div>
         <div style="text-align:center;min-width:120px;padding-top:4px">
             <div style="font-size:0.9em;color:#73788a">&#9644; House agrees</div>
-            <div style="font-size:0.75em;color:#73788a;margin-top:2px">Effective: 65%</div>
+            <div style="font-size:0.75em;color:#73788a;margin-top:2px">Effective: 70%</div>
         </div>
     </div>
 </div>
@@ -320,11 +320,11 @@ tr:hover { background: #fdf8f4; }
 <div class="lines-grid">
     <div class="line-card line-active">
         <div class="line-label">Active Line (AI-Managed)</div>
-        <div class="line-pnl" style="color:#9ea2b0">&#9644; +0.00%</div>
+        <div class="line-pnl" style="color:#16a34a">&#9650; +0.93%</div>
         <div class="line-detail">
-            State: FLAT <br>
-            Entry: FLAT<br>
-            Realised: +0.00% | Total: +0.00%
+            State: HELD LONG<br>
+            Entry: $119.50<br>
+            Realised: +0.00% | Total: +0.93%
         </div>
     </div>
     <div class="line-card line-passive">
@@ -338,15 +338,15 @@ tr:hover { background: #fdf8f4; }
 </div>
 
 <div class="alpha-card">
-    <div class="alpha-value" style="color:#9ea2b0">+0.00%</div>
-    <div class="alpha-label">Alpha (Active - Passive) &middot; Tied</div>
+    <div class="alpha-value" style="color:#16a34a">+0.93%</div>
+    <div class="alpha-label">Alpha (Active - Passive) &middot; Active wins</div>
 </div>
 
 <div class="chart-area">
     <div class="card-title">Price Timeline (Last 2h)</div>
     <svg viewBox="0 0 1040 180" style="width:100%;height:auto">
         <rect x="40" y="20" width="960" height="140" fill="#fdf8f4" rx="4"/>
-        
+        <line x1="40" y1="147.6" x2="1000" y2="147.6" stroke="#0d7680" stroke-width="1" stroke-dasharray="6,4" opacity="0.6"/><text x="996" y="143.6" font-size="10" fill="#0d7680" text-anchor="end">Entry $119.50</text>
         <line x1="40" y1="32.5" x2="1000" y2="32.5" stroke="#d97706" stroke-width="1" stroke-dasharray="4,4" opacity="0.5"/><text x="44" y="28.5" font-size="10" fill="#d97706">Passive $120.61</text>
         <polyline points="40.0,147.6 1000.0,32.5" fill="none" stroke="#0d7680" stroke-width="2"/>
         <circle cx="1000.0" cy="32.5" r="4" fill="#0d7680"/>
@@ -360,10 +360,19 @@ tr:hover { background: #fdf8f4; }
     <span class="stance-badge" style="background:#fef3c7;color:#d97706">HOLD</span>
     <span style="margin-left:8px;font-size:0.85em">Report Confidence: 70%</span>
     <span style="margin-left:8px;font-size:0.85em;color:#0d7680">|</span>
-    <span style="margin-left:8px;font-size:0.85em">House: 65%</span>
+    <span style="margin-left:8px;font-size:0.85em">House: 70%</span>
     <p style="margin-top:8px;font-size:0.9em;color:#555">JD.com (JD) HOLD 70% 2026-02-18</p>
 </div>
 <h2 class="act-header" id="ledger">Act II: The Ledger</h2><div class="card"><div class="card-title">Recent Decisions</div><table><tr><th>Time</th><th>Type</th><th>From</th><th>To</th><th>Report</th><th>House</th><th>Trigger</th><th>Reason</th></tr><tr>
+            <td>2026-02-18 15:30</td>
+            <td>ENTRY</td>
+            <td><span style="color:#9ea2b0">FLAT</span></td>
+            <td><span style="color:#16a34a">BUY</span></td>
+            <td>70%</td>
+            <td>70%</td>
+            <td>autonomous</td>
+            <td style="font-size:0.8em">DUCK REBUY: Storm passed, re-entering long</td>
+        </tr><tr>
             <td>2026-02-18 15:27</td>
             <td>STANCE_UPDATE</td>
             <td><span style="color:#d97706">HOLD</span></td>
@@ -398,12 +407,12 @@ tr:hover { background: #fdf8f4; }
     <div class="card">
         <div class="card-title">Decision Analysis</div>
         <table>
-            <tr><td>Total Decisions</td><td style="text-align:right;font-weight:700">2</td></tr>
-            <tr><td>Entries</td><td style="text-align:right">0</td></tr>
+            <tr><td>Total Decisions</td><td style="text-align:right;font-weight:700">3</td></tr>
+            <tr><td>Entries</td><td style="text-align:right">1</td></tr>
             <tr><td>Exits</td><td style="text-align:right">0</td></tr>
             <tr><td>Stance Updates</td><td style="text-align:right">2</td></tr>
             <tr><td>Report-Triggered</td><td style="text-align:right">2</td></tr>
-            <tr><td>Autonomous</td><td style="text-align:right">0</td></tr>
+            <tr><td>Autonomous</td><td style="text-align:right">1</td></tr>
             <tr><td>Overrides &#9889;</td><td style="text-align:right;font-weight:700">0 (0%)</td></tr>
         </table>
     </div>
