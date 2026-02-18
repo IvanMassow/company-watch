@@ -1,6 +1,6 @@
 {
   "product": "company_watch",
-  "generated_at": "2026-02-18T02:39:29.208657+00:00",
+  "generated_at": "2026-02-18T02:49:41.031949+00:00",
   "stock_count": 5,
   "stocks": [
     {
@@ -34,7 +34,7 @@
     {
       "ticker": "JD",
       "company": "JD.com",
-      "current_price": 27.33,
+      "current_price": 27.14,
       "active": {
         "state": "FLAT",
         "direction": null,
@@ -51,13 +51,13 @@
       },
       "passive": {
         "entry_price": 27.14,
-        "pnl": 0.7000736919675671,
-        "daily_pnl": 0.7000736919675671
+        "pnl": 0.0,
+        "daily_pnl": 0
       },
-      "alpha": -0.7000736919675671,
+      "alpha": 0.0,
       "total_trades": 0,
       "win_rate": 0,
-      "days_tracked": 1
+      "days_tracked": 2
     },
     {
       "ticker": "BIDU",
@@ -85,7 +85,7 @@
       "alpha": -0.23355959419022088,
       "total_trades": 0,
       "win_rate": 0,
-      "days_tracked": 1
+      "days_tracked": 2
     },
     {
       "ticker": "NTES",
