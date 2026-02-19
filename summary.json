@@ -1,6 +1,6 @@
 {
   "product": "company_watch",
-  "generated_at": "2026-02-19T13:23:14.022408+00:00",
+  "generated_at": "2026-02-19T13:38:27.073689+00:00",
   "stock_count": 5,
   "stocks": [
     {
@@ -16,9 +16,9 @@
         "total_pnl": 0.21874798944862858,
         "daily_pnl": 0.21874798944862858,
         "stance": "BUY",
-        "confidence": 70.0,
+        "confidence": 60.0,
         "report_confidence": 70.0,
-        "house_confidence": 70.0,
+        "house_confidence": 60.0,
         "is_ducking": false
       },
       "passive": {
@@ -44,9 +44,9 @@
         "total_pnl": 0.29271862422247297,
         "daily_pnl": 0.29271862422247297,
         "stance": "BUY",
-        "confidence": 70.0,
+        "confidence": 60.0,
         "report_confidence": 70.0,
-        "house_confidence": 70.0,
+        "house_confidence": 60.0,
         "is_ducking": false
       },
       "passive": {
@@ -71,7 +71,7 @@
         "realised_pnl": 0,
         "total_pnl": 0,
         "daily_pnl": 0,
-        "stance": "HOLD",
+        "stance": "BUY",
         "confidence": 55.0,
         "report_confidence": 70.0,
         "house_confidence": 55.0,
@@ -100,9 +100,9 @@
         "total_pnl": 0.15899581589957967,
         "daily_pnl": 0.15899581589957967,
         "stance": "BUY",
-        "confidence": 70.0,
+        "confidence": 55.0,
         "report_confidence": 70.0,
-        "house_confidence": 70.0,
+        "house_confidence": 55.0,
         "is_ducking": false
       },
       "passive": {
@@ -127,10 +127,10 @@
         "realised_pnl": 0,
         "total_pnl": 0,
         "daily_pnl": 0,
-        "stance": "HOLD",
-        "confidence": 65.0,
+        "stance": "BUY",
+        "confidence": 55.0,
         "report_confidence": 70.0,
-        "house_confidence": 65.0,
+        "house_confidence": 55.0,
         "is_ducking": false
       },
       "passive": {
@@ -155,9 +155,9 @@
     "total_pnl": 0.21874798944862858,
     "daily_pnl": 0.21874798944862858,
     "stance": "BUY",
-    "confidence": 70.0,
+    "confidence": 60.0,
     "report_confidence": 70.0,
-    "house_confidence": 70.0,
+    "house_confidence": 60.0,
     "is_ducking": false
   },
   "passive": {
