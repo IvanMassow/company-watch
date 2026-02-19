@@ -1,6 +1,6 @@
 {
   "product": "company_watch",
-  "generated_at": "2026-02-19T15:30:42.392651+00:00",
+  "generated_at": "2026-02-19T15:31:05.979266+00:00",
   "stock_count": 5,
   "stocks": [
     {
@@ -38,15 +38,15 @@
       "active": {
         "state": "HELD",
         "direction": "LONG",
-        "entry_price": 27.33,
-        "unrealised_pnl": 0.29271862422247297,
-        "realised_pnl": 0,
+        "entry_price": 27.41,
+        "unrealised_pnl": 0.0,
+        "realised_pnl": 0.29271862422247297,
         "total_pnl": 0.29271862422247297,
         "daily_pnl": 0.29271862422247297,
         "stance": "BUY",
-        "confidence": 60.0,
+        "confidence": 70.0,
         "report_confidence": 70.0,
-        "house_confidence": 60.0,
+        "house_confidence": 70.0,
         "is_ducking": false
       },
       "passive": {
@@ -55,8 +55,8 @@
         "daily_pnl": 0.994841562269711
       },
       "alpha": -0.702122938047238,
-      "total_trades": 14,
-      "win_rate": 0.0,
+      "total_trades": 15,
+      "win_rate": 6.666666666666667,
       "days_tracked": 3
     },
     {
@@ -94,15 +94,15 @@
       "active": {
         "state": "HELD",
         "direction": "LONG",
-        "entry_price": 119.5,
-        "unrealised_pnl": 0.15899581589957967,
-        "realised_pnl": 0,
+        "entry_price": 119.69,
+        "unrealised_pnl": 0.0,
+        "realised_pnl": 0.15899581589957967,
         "total_pnl": 0.15899581589957967,
         "daily_pnl": 0.15899581589957967,
         "stance": "BUY",
-        "confidence": 55.0,
+        "confidence": 70.0,
         "report_confidence": 70.0,
-        "house_confidence": 55.0,
+        "house_confidence": 70.0,
         "is_ducking": false
       },
       "passive": {
@@ -111,8 +111,8 @@
         "daily_pnl": -0.7627891551281002
       },
       "alpha": 0.9217849710276799,
-      "total_trades": 14,
-      "win_rate": 0.0,
+      "total_trades": 15,
+      "win_rate": 6.666666666666667,
       "days_tracked": 3
     },
     {
