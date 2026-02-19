@@ -1,6 +1,6 @@
 {
   "product": "company_watch",
-  "generated_at": "2026-02-19T15:36:54.955997+00:00",
+  "generated_at": "2026-02-19T15:37:22.964454+00:00",
   "stock_count": 5,
   "stocks": [
     {
@@ -44,9 +44,9 @@
         "total_pnl": 0.29271862422247297,
         "daily_pnl": 0.29271862422247297,
         "stance": "BUY",
-        "confidence": 75.0,
+        "confidence": 70.0,
         "report_confidence": 70.0,
-        "house_confidence": 75.0,
+        "house_confidence": 70.0,
         "is_ducking": false
       },
       "passive": {
@@ -55,8 +55,8 @@
         "daily_pnl": 0.994841562269711
       },
       "alpha": -0.702122938047238,
-      "total_trades": 23,
-      "win_rate": 4.3478260869565215,
+      "total_trades": 24,
+      "win_rate": 4.166666666666666,
       "days_tracked": 3
     },
     {
@@ -111,8 +111,8 @@
         "daily_pnl": -0.7627891551281002
       },
       "alpha": 0.9217849710276799,
-      "total_trades": 23,
-      "win_rate": 4.3478260869565215,
+      "total_trades": 24,
+      "win_rate": 4.166666666666666,
       "days_tracked": 3
     },
     {
