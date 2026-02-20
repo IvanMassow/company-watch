@@ -1,6 +1,6 @@
 {
   "product": "company_watch",
-  "generated_at": "2026-02-20T13:35:19.522280+00:00",
+  "generated_at": "2026-02-20T14:30:07.883092+00:00",
   "stock_count": 5,
   "stocks": [
     {
@@ -8,18 +8,18 @@
       "company": "Alibaba",
       "current_price": 154.27,
       "active": {
-        "state": "HELD",
-        "direction": "LONG",
-        "entry_price": 155.77,
-        "unrealised_pnl": -0.9629582076137896,
-        "realised_pnl": 0.21874798944862858,
+        "state": "FLAT",
+        "direction": null,
+        "entry_price": null,
+        "unrealised_pnl": 0,
+        "realised_pnl": -0.744210218165161,
         "total_pnl": -0.744210218165161,
         "daily_pnl": -0.9629582076137896,
-        "stance": "BUY",
-        "confidence": 70.0,
+        "stance": "HOLD",
+        "confidence": 60.0,
         "report_confidence": 70.0,
-        "house_confidence": 70.0,
-        "is_ducking": true
+        "house_confidence": 60.0,
+        "is_ducking": false
       },
       "passive": {
         "entry_price": 155.73,
@@ -27,8 +27,8 @@
         "daily_pnl": -0.9375200667822383
       },
       "alpha": 0.19330984861707734,
-      "total_trades": 29,
-      "win_rate": 3.4482758620689653,
+      "total_trades": 30,
+      "win_rate": 3.3333333333333335,
       "days_tracked": 4
     },
     {
@@ -92,18 +92,18 @@
       "company": "NetEase",
       "current_price": 119.16,
       "active": {
-        "state": "HELD",
-        "direction": "LONG",
-        "entry_price": 119.69,
-        "unrealised_pnl": -0.44281059403459033,
-        "realised_pnl": 0.15899581589957967,
+        "state": "FLAT",
+        "direction": null,
+        "entry_price": null,
+        "unrealised_pnl": 0,
+        "realised_pnl": -0.28381477813501066,
         "total_pnl": -0.28381477813501066,
         "daily_pnl": -0.44281059403459033,
-        "stance": "BUY",
+        "stance": "HOLD",
         "confidence": 65.0,
         "report_confidence": 70.0,
         "house_confidence": 65.0,
-        "is_ducking": true
+        "is_ducking": false
       },
       "passive": {
         "entry_price": 120.61,
@@ -111,8 +111,8 @@
         "daily_pnl": -1.2022220379736364
       },
       "alpha": 0.9184072598386257,
-      "total_trades": 29,
-      "win_rate": 3.4482758620689653,
+      "total_trades": 30,
+      "win_rate": 3.3333333333333335,
       "days_tracked": 4
     },
     {
@@ -147,18 +147,18 @@
   "ticker": "BABA",
   "current_price": 154.27,
   "active": {
-    "state": "HELD",
-    "direction": "LONG",
-    "entry_price": 155.77,
-    "unrealised_pnl": -0.9629582076137896,
-    "realised_pnl": 0.21874798944862858,
+    "state": "FLAT",
+    "direction": null,
+    "entry_price": null,
+    "unrealised_pnl": 0,
+    "realised_pnl": -0.744210218165161,
     "total_pnl": -0.744210218165161,
     "daily_pnl": -0.9629582076137896,
-    "stance": "BUY",
-    "confidence": 70.0,
+    "stance": "HOLD",
+    "confidence": 60.0,
     "report_confidence": 70.0,
-    "house_confidence": 70.0,
-    "is_ducking": true
+    "house_confidence": 60.0,
+    "is_ducking": false
   },
   "passive": {
     "entry_price": 155.73,
@@ -166,7 +166,7 @@
     "daily_pnl": -0.9375200667822383
   },
   "alpha": 0.19330984861707734,
-  "total_trades": 29,
-  "win_rate": 3.4482758620689653,
+  "total_trades": 30,
+  "win_rate": 3.3333333333333335,
   "days_tracked": 4
 }
