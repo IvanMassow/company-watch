@@ -1,6 +1,6 @@
 {
   "product": "company_watch",
-  "generated_at": "2026-02-21T01:40:51.595082+00:00",
+  "generated_at": "2026-02-21T01:41:18.483303+00:00",
   "stock_count": 5,
   "stocks": [
     {
@@ -90,7 +90,7 @@
     {
       "ticker": "NTES",
       "company": "NetEase",
-      "current_price": 119.16,
+      "current_price": 118.41,
       "active": {
         "state": "FLAT",
         "direction": null,
@@ -98,7 +98,7 @@
         "unrealised_pnl": 0,
         "realised_pnl": -0.28381477813501066,
         "total_pnl": -0.28381477813501066,
-        "daily_pnl": -0.44281059403459033,
+        "daily_pnl": 0,
         "stance": "HOLD",
         "confidence": 55.0,
         "report_confidence": 40.0,
@@ -107,13 +107,13 @@
       },
       "passive": {
         "entry_price": 120.61,
-        "pnl": -1.2022220379736364,
-        "daily_pnl": -1.2022220379736364
+        "pnl": -1.8240610231324128,
+        "daily_pnl": -1.8240610231324128
       },
-      "alpha": 0.9184072598386257,
+      "alpha": 1.5402462449974021,
       "total_trades": 30,
       "win_rate": 3.3333333333333335,
-      "days_tracked": 4
+      "days_tracked": 5
     },
     {
       "ticker": "PDD",
