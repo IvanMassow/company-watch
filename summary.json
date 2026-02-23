@@ -1,6 +1,6 @@
 {
   "product": "company_watch",
-  "generated_at": "2026-02-23T01:03:29.450630+00:00",
+  "generated_at": "2026-02-23T01:03:29.675047+00:00",
   "stock_count": 5,
   "stocks": [
     {
@@ -141,7 +141,7 @@
       "alpha": -4.646988432389307,
       "total_trades": 0,
       "win_rate": 0,
-      "days_tracked": 6
+      "days_tracked": 7
     }
   ],
   "ticker": "BABA",
