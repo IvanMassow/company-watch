@@ -1,6 +1,6 @@
 {
   "product": "company_watch",
-  "generated_at": "2026-03-02T16:47:12.567925+00:00",
+  "generated_at": "2026-03-02T17:00:33.816416+00:00",
   "stock_count": 5,
   "stocks": [
     {
@@ -55,8 +55,8 @@
         "daily_pnl": -2.247605011053793
       },
       "alpha": -0.6701834789156309,
-      "total_trades": 29,
-      "win_rate": 3.4482758620689653,
+      "total_trades": 30,
+      "win_rate": 3.3333333333333335,
       "days_tracked": 11
     },
     {
