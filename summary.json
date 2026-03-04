@@ -1,6 +1,6 @@
 {
   "product": "company_watch",
-  "generated_at": "2026-03-04T13:10:17.942602+00:00",
+  "generated_at": "2026-03-04T13:11:35.287317+00:00",
   "stock_count": 5,
   "stocks": [
     {
@@ -16,9 +16,9 @@
         "total_pnl": -0.744210218165161,
         "daily_pnl": 0,
         "stance": "HOLD",
-        "confidence": 50.0,
-        "report_confidence": 35.0,
-        "house_confidence": 50.0,
+        "confidence": 55.0,
+        "report_confidence": 74.0,
+        "house_confidence": 55.0,
         "is_ducking": false
       },
       "passive": {
@@ -44,9 +44,9 @@
         "total_pnl": -6.164778639549871,
         "daily_pnl": -6.457497263772344,
         "stance": "HOLD",
-        "confidence": 50.0,
-        "report_confidence": 35.0,
-        "house_confidence": 50.0,
+        "confidence": 55.0,
+        "report_confidence": 64.0,
+        "house_confidence": 55.0,
         "is_ducking": true
       },
       "passive": {
@@ -72,9 +72,9 @@
         "total_pnl": 0,
         "daily_pnl": 0,
         "stance": "HOLD",
-        "confidence": 50.0,
-        "report_confidence": 35.0,
-        "house_confidence": 50.0,
+        "confidence": 55.0,
+        "report_confidence": 40.0,
+        "house_confidence": 55.0,
         "is_ducking": false
       },
       "passive": {
@@ -101,7 +101,7 @@
         "daily_pnl": 0,
         "stance": "HOLD",
         "confidence": 55.0,
-        "report_confidence": 35.0,
+        "report_confidence": 40.0,
         "house_confidence": 55.0,
         "is_ducking": false
       },
@@ -129,7 +129,7 @@
         "daily_pnl": 0,
         "stance": "HOLD",
         "confidence": 55.0,
-        "report_confidence": 35.0,
+        "report_confidence": 40.0,
         "house_confidence": 55.0,
         "is_ducking": false
       },
@@ -155,9 +155,9 @@
     "total_pnl": -0.744210218165161,
     "daily_pnl": 0,
     "stance": "HOLD",
-    "confidence": 50.0,
-    "report_confidence": 35.0,
-    "house_confidence": 50.0,
+    "confidence": 55.0,
+    "report_confidence": 74.0,
+    "house_confidence": 55.0,
     "is_ducking": false
   },
   "passive": {
