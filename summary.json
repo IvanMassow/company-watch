@@ -1,6 +1,6 @@
 {
   "product": "company_watch",
-  "generated_at": "2026-03-04T14:22:54.004593+00:00",
+  "generated_at": "2026-03-04T14:30:01.116433+00:00",
   "stock_count": 5,
   "stocks": [
     {
@@ -36,18 +36,15 @@
       "company": "JD.com",
       "current_price": 25.64,
       "active": {
-        "state": "HELD",
-        "direction": "LONG",
-        "entry_price": 27.41,
-        "unrealised_pnl": -6.457497263772344,
-        "realised_pnl": 0.29271862422247297,
+        "state": "FLAT",
+        "direction": null,
+        "entry_price": null,
+        "unrealised_pnl": 0,
+        "realised_pnl": -6.164778639549871,
         "total_pnl": -6.164778639549871,
         "daily_pnl": -6.457497263772344,
-        "stance": "HOLD",
-        "confidence": 55.0,
-        "report_confidence": 64.0,
-        "house_confidence": 55.0,
-        "is_ducking": true
+        "stance": null,
+        "confidence": null
       },
       "passive": {
         "entry_price": 27.14,
@@ -55,8 +52,8 @@
         "daily_pnl": -5.52689756816507
       },
       "alpha": -0.6378810713848013,
-      "total_trades": 30,
-      "win_rate": 3.3333333333333335,
+      "total_trades": 31,
+      "win_rate": 3.225806451612903,
       "days_tracked": 13
     },
     {
