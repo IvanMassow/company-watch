@@ -1,12 +1,12 @@
 {
   "product": "company_watch",
-  "generated_at": "2026-03-05T00:28:32.741669+00:00",
+  "generated_at": "2026-03-05T01:02:01.814368+00:00",
   "stock_count": 5,
   "stocks": [
     {
       "ticker": "BABA",
       "company": "Alibaba",
-      "current_price": 135.59,
+      "current_price": 133.27,
       "active": {
         "state": "FLAT",
         "direction": null,
@@ -23,26 +23,26 @@
       },
       "passive": {
         "entry_price": 155.73,
-        "pnl": -12.932639825338718,
-        "daily_pnl": -12.932639825338718
+        "pnl": -14.422397739677633,
+        "daily_pnl": -14.422397739677633
       },
-      "alpha": 12.188429607173557,
+      "alpha": 13.678187521512472,
       "total_trades": 30,
       "win_rate": 3.3333333333333335,
-      "days_tracked": 13
+      "days_tracked": 14
     },
     {
       "ticker": "JD",
       "company": "JD.com",
-      "current_price": 25.64,
+      "current_price": 25.4,
       "active": {
         "state": "HELD",
         "direction": "LONG",
         "entry_price": 25.64,
-        "unrealised_pnl": 0.0,
+        "unrealised_pnl": -0.9360374414976675,
         "realised_pnl": -6.164778639549871,
-        "total_pnl": -6.164778639549871,
-        "daily_pnl": -6.457497263772344,
+        "total_pnl": -7.1008160810475385,
+        "daily_pnl": -0.9360374414976675,
         "stance": "BUY",
         "confidence": 70.0,
         "report_confidence": 64.0,
@@ -51,18 +51,18 @@
       },
       "passive": {
         "entry_price": 27.14,
-        "pnl": -5.52689756816507,
-        "daily_pnl": -5.52689756816507
+        "pnl": -6.411201179071488,
+        "daily_pnl": -6.411201179071488
       },
-      "alpha": -0.6378810713848013,
+      "alpha": -0.6896149019760509,
       "total_trades": 31,
       "win_rate": 3.225806451612903,
-      "days_tracked": 13
+      "days_tracked": 14
     },
     {
       "ticker": "BIDU",
       "company": "Baidu",
-      "current_price": 118.71,
+      "current_price": 118.98,
       "active": {
         "state": "FLAT",
         "direction": null,
@@ -79,18 +79,18 @@
       },
       "passive": {
         "entry_price": 137.01,
-        "pnl": -13.356689292752352,
-        "daily_pnl": -13.356689292752352
+        "pnl": -13.15962338515436,
+        "daily_pnl": -13.15962338515436
       },
-      "alpha": 13.356689292752352,
+      "alpha": 13.15962338515436,
       "total_trades": 0,
       "win_rate": 0,
-      "days_tracked": 13
+      "days_tracked": 14
     },
     {
       "ticker": "NTES",
       "company": "NetEase",
-      "current_price": 115.56,
+      "current_price": 117.08,
       "active": {
         "state": "FLAT",
         "direction": null,
@@ -107,18 +107,18 @@
       },
       "passive": {
         "entry_price": 120.61,
-        "pnl": -4.187049166735758,
-        "daily_pnl": -4.187049166735758
+        "pnl": -2.9267888234806407,
+        "daily_pnl": -2.9267888234806407
       },
-      "alpha": 3.903234388600747,
+      "alpha": 2.64297404534563,
       "total_trades": 30,
       "win_rate": 3.3333333333333335,
-      "days_tracked": 13
+      "days_tracked": 14
     },
     {
       "ticker": "PDD",
       "company": "PDD Holdings",
-      "current_price": 100.71,
+      "current_price": 101.19,
       "active": {
         "state": "FLAT",
         "direction": null,
@@ -135,17 +135,17 @@
       },
       "passive": {
         "entry_price": 100.28,
-        "pnl": 0.428799361786989,
-        "daily_pnl": 0.428799361786989
+        "pnl": 0.907459114479454,
+        "daily_pnl": 0.907459114479454
       },
-      "alpha": -0.428799361786989,
+      "alpha": -0.907459114479454,
       "total_trades": 0,
       "win_rate": 0,
-      "days_tracked": 13
+      "days_tracked": 14
     }
   ],
   "ticker": "BABA",
-  "current_price": 135.59,
+  "current_price": 133.27,
   "active": {
     "state": "FLAT",
     "direction": null,
@@ -162,11 +162,11 @@
   },
   "passive": {
     "entry_price": 155.73,
-    "pnl": -12.932639825338718,
-    "daily_pnl": -12.932639825338718
+    "pnl": -14.422397739677633,
+    "daily_pnl": -14.422397739677633
   },
-  "alpha": 12.188429607173557,
+  "alpha": 13.678187521512472,
   "total_trades": 30,
   "win_rate": 3.3333333333333335,
-  "days_tracked": 13
+  "days_tracked": 14
 }
