@@ -1,6 +1,6 @@
 {
   "product": "company_watch",
-  "generated_at": "2026-03-06T12:50:52.023208+00:00",
+  "generated_at": "2026-03-06T12:52:37.892168+00:00",
   "stock_count": 5,
   "stocks": [
     {
@@ -17,7 +17,7 @@
         "daily_pnl": 0,
         "stance": "HOLD",
         "confidence": 55.0,
-        "report_confidence": 74.0,
+        "report_confidence": 50.0,
         "house_confidence": 55.0,
         "is_ducking": false
       },
@@ -43,10 +43,10 @@
         "realised_pnl": -6.164778639549871,
         "total_pnl": -6.82780516061072,
         "daily_pnl": -0.663026521060849,
-        "stance": "BUY",
-        "confidence": 70.0,
-        "report_confidence": 64.0,
-        "house_confidence": 70.0,
+        "stance": "HOLD",
+        "confidence": 60.0,
+        "report_confidence": 50.0,
+        "house_confidence": 60.0,
         "is_ducking": false
       },
       "passive": {
@@ -73,7 +73,7 @@
         "daily_pnl": 0,
         "stance": "HOLD",
         "confidence": 55.0,
-        "report_confidence": 40.0,
+        "report_confidence": 50.0,
         "house_confidence": 55.0,
         "is_ducking": false
       },
@@ -101,7 +101,7 @@
         "daily_pnl": 0,
         "stance": "HOLD",
         "confidence": 55.0,
-        "report_confidence": 40.0,
+        "report_confidence": 50.0,
         "house_confidence": 55.0,
         "is_ducking": false
       },
@@ -129,7 +129,7 @@
         "daily_pnl": 0,
         "stance": "HOLD",
         "confidence": 55.0,
-        "report_confidence": 40.0,
+        "report_confidence": 50.0,
         "house_confidence": 55.0,
         "is_ducking": false
       },
@@ -156,7 +156,7 @@
     "daily_pnl": 0,
     "stance": "HOLD",
     "confidence": 55.0,
-    "report_confidence": 74.0,
+    "report_confidence": 50.0,
     "house_confidence": 55.0,
     "is_ducking": false
   },
