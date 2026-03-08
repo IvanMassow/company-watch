@@ -1,6 +1,6 @@
 {
   "product": "company_watch",
-  "generated_at": "2026-03-08T04:58:53.140728+00:00",
+  "generated_at": "2026-03-08T05:21:47.460202+00:00",
   "stock_count": 5,
   "stocks": [
     {
@@ -29,7 +29,12 @@
       "alpha": 15.27068736097823,
       "total_trades": 30,
       "win_rate": 3.3333333333333335,
-      "days_tracked": 17
+      "days_tracked": 17,
+      "trade_stats": {
+        "best": 0.21874798944862858,
+        "worst": -0.9629582076137896
+      },
+      "short_enhanced_pnl": 14.526477142813068
     },
     {
       "ticker": "JD",
@@ -57,7 +62,12 @@
       "alpha": -0.3382559692104854,
       "total_trades": 31,
       "win_rate": 3.225806451612903,
-      "days_tracked": 17
+      "days_tracked": 17,
+      "trade_stats": {
+        "best": 0.29271862422247297,
+        "worst": -6.457497263772344
+      },
+      "short_enhanced_pnl": -1.0818177600864072
     },
     {
       "ticker": "BIDU",
@@ -85,7 +95,12 @@
       "alpha": 13.108532223925257,
       "total_trades": 0,
       "win_rate": 0,
-      "days_tracked": 17
+      "days_tracked": 17,
+      "trade_stats": {
+        "best": 0,
+        "worst": 0
+      },
+      "short_enhanced_pnl": 13.108532223925257
     },
     {
       "ticker": "NTES",
@@ -113,7 +128,12 @@
       "alpha": 2.029426246655642,
       "total_trades": 30,
       "win_rate": 3.3333333333333335,
-      "days_tracked": 17
+      "days_tracked": 17,
+      "trade_stats": {
+        "best": 0.15899581589957967,
+        "worst": -0.44281059403459033
+      },
+      "short_enhanced_pnl": 1.7456114685206314
     },
     {
       "ticker": "PDD",
@@ -141,7 +161,12 @@
       "alpha": -1.6852812126047045,
       "total_trades": 0,
       "win_rate": 0,
-      "days_tracked": 17
+      "days_tracked": 17,
+      "trade_stats": {
+        "best": 0,
+        "worst": 0
+      },
+      "short_enhanced_pnl": -1.6852812126047045
     }
   ],
   "ticker": "BABA",
